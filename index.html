@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<title>GroDrones | Precision Aerial Application for Oregon Agriculture</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--logo-brown: #835328;
+--logo-green: #5F8523;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+color: #334155;
+background-color: #ffffff;
+letter-spacing: -0.011em;
+}
+
+h1, h2, h3 {
+font-family: 'Inter', sans-serif;
+font-weight: 600;
+color: var(--logo-brown);
+letter-spacing: -0.02em;
+}
+
+.accent-green { color: var(--logo-green); }
+.bg-accent-green { background-color: var(--logo-green); }
+.border-accent-green { border-color: var(--logo-green); }
+
+.reveal {
+opacity: 0;
+transform: translateY(20px);
+transition: all 0.8s ease-out;
+}
+.reveal.active {
+opacity: 1;
+transform: translateY(0);
+}
+
+.hero-overlay {
+background: linear-gradient(to bottom, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.65) 50%, rgba(255,255,255,0.96) 100%);
+}
+
+.btn-primary:hover {
+background-color: #4a6b1a;
+}
+
+.hero-heading {
+color: #6b4220;
+}
+</style>
+</head>
+<body class="antialiased">
+
+<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-stone-100">
+<div class="max-w-6xl mx-auto px-6 h-24 flex items-center justify-between">
+<div class="flex items-center">
+<div class="h-10 md:h-12 w-auto flex items-center justify-start overflow-hidden">
+<img src="logo.png" alt="GroDrones Logo" class="h-full w-auto object-contain">
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8 text-sm font-semibold tracking-tight text-stone-600 uppercase">
+<a href="#application" class="hover:text-stone-900 transition-colors">Application</a>
+<a href="#scouting" class="hover:text-stone-900 transition-colors">NDVI Scouting</a>
+<a href="#about" class="hover:text-stone-900 transition-colors">About</a>
+<a href="#contact" class="bg-accent-green text-white px-6 py-2.5 hover:opacity-90 transition-all shadow-sm">Contact</a>
+</div>
+<button class="md:hidden" id="mobileMenuBtn">
+<i data-lucide="menu" class="w-7 h-7 text-stone-800"></i>
+</button>
+</div>
+</nav>
+
+<section class="relative min-h-[65vh] flex items-center justify-center pt-32 pb-16 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img src="Aerial_Application.jpg"
+alt="Oregon Agriculture Landscape"
+class="w-full h-full object-cover">
+<div class="absolute inset-0 hero-overlay"></div>
+</div>
+
+<div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+<div class="reveal">
+<h1 class="text-4xl md:text-6xl lg:text-7xl mb-6 leading-[1.05] tracking-tight font-semibold hero-heading">
+Precision Aerial Application for Oregon Agriculture
+</h1>
+<p class="text-xl md:text-2xl text-stone-700 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+Aerial application and crop scouting built for timing, access, and minimal ground impact.
+</p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-5 mb-8">
+<a href="#contact" class="w-full sm:w-auto bg-accent-green text-white px-12 py-5 text-lg font-semibold btn-primary transition-all shadow-lg shadow-green-900/10">
+Request Scheduling
+</a>
+<a href="#scouting" class="w-full sm:w-auto border border-stone-400 bg-white/40 backdrop-blur-sm text-stone-800 px-12 py-5 text-lg font-semibold hover:bg-white transition-all">
+Crop Scouting (NDVI)
+</a>
+</div>
+<p class="text-xs uppercase tracking-[0.15em] text-stone-500 font-bold opacity-80">
+FAA Part 107 and Part 137 certified. Insured. Oregon-based.
+</p>
+</div>
+</div>
+</section>
+
+<section id="application" class="py-16 md:py-24 px-6 border-t border-stone-50">
+<div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+<div class="reveal">
+<h2 class="text-3xl md:text-5xl mb-6 font-semibold">Aerial Application</h2>
+<p class="text-lg text-slate-600 leading-relaxed mb-8">
+Send a field address or pin, crop, acreage, and timing window. We confirm fit and follow up with next steps and a schedule estimate.
+</p>
+<div class="space-y-4">
+<div class="flex gap-4">
+<i data-lucide="check-circle-2" class="accent-green w-6 h-6 shrink-0 mt-0.5"></i>
+<p class="text-slate-700 font-medium text-lg">Fungicides, insecticides, nutritionals, organic inputs when applicable.</p>
+</div>
+<div class="flex gap-4">
+<i data-lucide="check-circle-2" class="accent-green w-6 h-6 shrink-0 mt-0.5"></i>
+<p class="text-slate-700 font-medium text-lg">Low ground impact for wet or sensitive fields.</p>
+</div>
+<div class="flex gap-4">
+<i data-lucide="check-circle-2" class="accent-green w-6 h-6 shrink-0 mt-0.5"></i>
+<p class="text-slate-700 font-medium text-lg">Clear documentation provided after each job.</p>
+</div>
+<div class="flex gap-4">
+<i data-lucide="check-circle-2" class="accent-green w-6 h-6 shrink-0 mt-0.5"></i>
+<p class="text-slate-700 font-medium text-lg">Platform: DJI Agras T50 aerial system.</p>
+</div>
+</div>
+</div>
+<div class="reveal delay-100">
+<img src="Aerial_Application.jpg"
+alt="Agricultural Drone Spraying Vineyard"
+class="rounded-sm shadow-xl w-full max-h-[400px] object-cover">
+</div>
+</div>
+</section>
+
+<section id="scouting" class="py-16 md:py-24 px-6 bg-stone-50/50">
+<div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+<div class="reveal order-2 md:order-1">
+<img src="NDVI_Scouting.jpg"
+alt="Aerial Crop Pattern Analysis"
+class="rounded-sm shadow-xl w-full max-h-[400px] object-cover">
+</div>
+<div class="reveal order-1 md:order-2 delay-100">
+<h2 class="text-3xl md:text-5xl mb-6 font-semibold">Crop Scouting and Mapping (NDVI)</h2>
+<p class="text-lg text-slate-600 leading-relaxed mb-8">
+Identify crop stress, drainage issues, and growth variability before visible symptoms. Scouting can stand alone or support targeted applications.
+</p>
+<div class="space-y-4">
+<div class="flex gap-4">
+<i data-lucide="map" class="accent-green w-6 h-6 shrink-0"></i>
+<p class="text-slate-700 font-medium text-lg">NDVI/vigor map and high-resolution imagery</p>
+</div>
+<div class="flex gap-4">
+<i data-lucide="file-text" class="accent-green w-6 h-6 shrink-0"></i>
+<p class="text-slate-700 font-medium text-lg">Marked zones and short PDF summary</p>
+</div>
+<div class="flex gap-4">
+<i data-lucide="clock" class="accent-green w-6 h-6 shrink-0"></i>
+<p class="text-slate-700 font-medium text-lg">Turnaround: 24–48 hours.</p>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section id="about" class="py-12 md:py-16 px-6 bg-white">
+<div class="max-w-3xl mx-auto text-center reveal">
+<div class="flex justify-center mb-4">
+<div class="w-[150px] h-[150px] rounded-full border border-stone-100 shadow-[0_6_20px_rgba(0,0,0,0.06)] overflow-hidden flex items-center justify-center">
+<img src="about.jpg" alt="Geoffrey - GroDrones" class="w-full h-full object-cover">
+</div>
+</div>
+<p class="text-sm font-semibold uppercase tracking-[0.1em] text-stone-400 mb-6">Geoff Wilson</p>
+
+<h2 class="text-3xl md:text-4xl mb-6 font-semibold">About</h2>
+<p class="text-xl md:text-2xl text-slate-600 font-light leading-relaxed mb-4">
+GroDrones is an Oregon-based precision aerial application company serving vineyards, orchards, nurseries, and specialty crops. We operate the DJI Agras T50 platform with a focus on timing, precision, and care for the land we serve.
+</p>
+<div class="mt-8 flex justify-center">
+<div class="h-px w-24 bg-stone-200"></div>
+</div>
+</div>
+</section>
+
+<section id="contact" class="py-16 md:py-24 px-6 border-t border-stone-100 bg-stone-50/20">
+<div class="max-w-6xl mx-auto">
+<div class="grid md:grid-cols-2 gap-12 md:gap-20">
+<div class="reveal">
+<h2 class="text-3xl md:text-5xl mb-6 font-semibold">Request Scheduling</h2>
+<p class="text-xl text-slate-600 mb-10 leading-relaxed">
+Tell us about your operation and we’ll follow up within 1 business day.
+</p>
+<div class="flex flex-col gap-3">
+<a href="mailto:geoff@grodrones.com" class="flex items-center gap-5 group w-fit">
+<div class="w-12 h-12 bg-white border border-stone-200 flex items-center justify-center rounded-sm accent-green shadow-sm group-hover:border-accent-green transition-colors">
+<i data-lucide="mail" class="w-6 h-6"></i>
+</div>
+<span class="text-xl font-medium text-stone-800 group-hover:text-black transition-colors tracking-tight">geoff@grodrones.com</span>
+</a>
+<a href="tel:+15032138323" class="flex items-center gap-5 group w-fit">
+<div class="w-12 h-12 bg-white border border-stone-200 flex items-center justify-center rounded-sm accent-green shadow-sm group-hover:border-accent-green transition-colors">
+<i data-lucide="phone" class="w-6 h-6"></i>
+</div>
+<span class="text-xl font-medium text-stone-800 group-hover:text-black transition-colors tracking-tight">503-213-8323</span>
+</a>
+</div>
+</div>
+<div class="reveal delay-100 bg-white p-8 md:p-10 border border-stone-100 rounded-sm shadow-xl">
+<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="space-y-5" id="contactForm">
+<input type="hidden" name="form-name" value="contact" />
+<p class="hidden">
+  <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+</p>
+
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Your Name *</label>
+<input type="text" name="name" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Full name">
+</div>
+<div class="grid grid-cols-2 gap-5">
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Email *</label>
+<input type="email" name="email" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Email address">
+</div>
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Phone</label>
+<input type="tel" name="phone" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Phone number">
+</div>
+</div>
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Preferred Contact Method</label>
+<select name="preferred_contact" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors">
+<option value="Email">Email</option>
+<option value="Phone Call">Phone Call</option>
+<option value="Text Message">Text Message</option>
+</select>
+</div>
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Field Address or Pin *</label>
+<input type="text" name="address" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Address, dropped pin, or coordinates">
+</div>
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Operation Name</label>
+<input type="text" name="operation" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="e.g. Willamette Estate">
+</div>
+<div class="grid grid-cols-2 gap-5">
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Crop</label>
+<input type="text" name="crop" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="e.g. Pinot Noir">
+</div>
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Acreage</label>
+<input type="text" name="acreage" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Acres">
+</div>
+</div>
+<div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Timing Window / Requirements</label>
+<textarea name="timing" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors h-24" placeholder="Timing window and any requirements"></textarea>
+</div>
+
+<button type="submit" class="w-full bg-accent-green text-white py-4 font-bold uppercase tracking-widest text-base btn-primary transition-all shadow-md mt-4">Request Scheduling</button>
+
+<div id="successMsg" class="hidden text-center text-emerald-800 text-sm mt-4 bg-emerald-50 py-4 px-5 border border-emerald-100">
+Thank you. We will respond within 1 business day.
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="py-12 border-t border-stone-100 bg-white px-6">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center">
+<div class="h-10 w-auto flex items-center">
+<img src="logo.png" alt="GroDrones" class="h-full w-auto grayscale opacity-40 hover:opacity-100 transition-opacity">
+</div>
+</div>
+<p class="text-[#9A9A9A] text-sm font-medium">2026 &bull; GroDrones &bull; Oregon</p>
+</div>
+</footer>
+
+<script>
+    window.scrollTo(0, 0);
+    try { lucide.createIcons(); } catch(e) { console.warn('Lucide icons not loaded:', e); }
+
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, observerOptions);
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+        document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // NETLIFY AJAX FORM SUBMISSION SCRIPT
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevents standard page reload
+        
+        let form = e.target;
+        let formData = new FormData(form);
+        
+        fetch('/', {
+            method: 'POST',
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+            // Show your custom success message
+            document.getElementById('successMsg').classList.remove('hidden');
+            // Clear the form fields
+            form.reset(); 
+        })
+        .catch((error) => {
+            alert('There was an error submitting the form. Please try again or email us directly.');
+            console.error('Netlify Form Error:', error);
+        });
+    });
+</script>
+</body>
+</html>
