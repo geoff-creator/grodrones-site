@@ -319,13 +319,19 @@ Thank you. We will respond within 1 business day.
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
         var form = e.target;
+        var successMsg = document.getElementById('successMsg');
+        successMsg.classList.add('hidden');
         fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams(new FormData(form)).toString()
-        }).then(function() {
-            form.reset();
-            document.getElementById('successMsg').classList.remove('hidden');
+        }).then(function(response) {
+            if (response.ok) {
+                form.reset();
+                successMsg.classList.remove('hidden');
+            } else {
+                alert('Submission failed (error ' + response.status + '). Please try again.');
+            }
         }).catch(function() {
             alert('Something went wrong. Please try again.');
         });
