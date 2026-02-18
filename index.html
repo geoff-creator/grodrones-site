@@ -5,8 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="favicon.png">
 <title>GroDrones | Precision Aerial Application for Oregon Agriculture</title>
+<meta name="description" content="Oregon-based drone aerial application and NDVI crop scouting for vineyards, orchards, nurseries, and specialty crops. Fast scheduling, clear documentation, and low ground impact.">
+<meta property="og:title" content="GroDrones | Precision Aerial Application for Oregon Agriculture">
+<meta property="og:description" content="Oregon-based drone aerial application and NDVI crop scouting for vineyards, orchards, nurseries, and specialty crops. Fast scheduling, clear documentation, and low ground impact.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/Aerial_Application.jpg">
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/lucide@0.574.0"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -74,9 +79,18 @@ color: #6b4220;
 <a href="#about" class="hover:text-stone-900 transition-colors">About</a>
 <a href="#contact" class="bg-accent-green text-white px-6 py-2.5 hover:opacity-90 transition-all shadow-sm">Contact</a>
 </div>
-<button class="md:hidden" id="mobileMenuBtn">
-<i data-lucide="menu" class="w-7 h-7 text-stone-800"></i>
+<button class="md:hidden" id="mobileMenuBtn" aria-label="Open navigation menu">
+<i data-lucide="menu" class="w-7 h-7 text-stone-800" id="menuIcon"></i>
+<i data-lucide="x" class="w-7 h-7 text-stone-800 hidden" id="closeIcon"></i>
 </button>
+</div>
+<div class="md:hidden hidden border-t border-stone-100 bg-white/95 backdrop-blur-md" id="mobileMenu">
+<div class="px-6 py-4 flex flex-col gap-3 text-sm font-semibold tracking-tight text-stone-600 uppercase">
+<a href="#application" class="py-2 hover:text-stone-900 transition-colors mobile-nav-link">Application</a>
+<a href="#scouting" class="py-2 hover:text-stone-900 transition-colors mobile-nav-link">NDVI Scouting</a>
+<a href="#about" class="py-2 hover:text-stone-900 transition-colors mobile-nav-link">About</a>
+<a href="#contact" class="bg-accent-green text-white px-6 py-2.5 text-center hover:opacity-90 transition-all shadow-sm mobile-nav-link">Contact</a>
+</div>
 </div>
 </nav>
 
@@ -142,6 +156,7 @@ Send a field address or pin, crop, acreage, and timing window. We confirm fit an
 <div class="reveal delay-100">
 <img src="Aerial_Application.jpg"
 alt="Agricultural Drone Spraying Vineyard"
+loading="lazy"
 class="rounded-sm shadow-xl w-full max-h-[400px] object-cover">
 </div>
 </div>
@@ -153,6 +168,7 @@ class="rounded-sm shadow-xl w-full max-h-[400px] object-cover">
 <div class="reveal order-2 md:order-1">
 <img src="NDVI_Scouting.jpg"
 alt="Aerial Crop Pattern Analysis"
+loading="lazy"
 class="rounded-sm shadow-xl w-full max-h-[400px] object-cover">
 </div>
 <div class="reveal order-1 md:order-2 delay-100">
@@ -183,8 +199,8 @@ Identify crop stress, drainage issues, and growth variability before visible sym
 <section id="about" class="py-12 md:py-16 px-6 bg-white">
 <div class="max-w-3xl mx-auto text-center reveal">
 <div class="flex justify-center mb-4">
-<div class="w-[150px] h-[150px] rounded-full border border-stone-100 shadow-[0_6_20px_rgba(0,0,0,0.06)] overflow-hidden flex items-center justify-center">
-<img src="about.jpg" alt="Geoffrey - GroDrones" class="w-full h-full object-cover">
+<div class="w-[150px] h-[150px] rounded-full border border-stone-100 shadow-[0_6px_20px_rgba(0,0,0,0.06)] overflow-hidden flex items-center justify-center">
+<img src="about.jpg" alt="Geoffrey - GroDrones" loading="lazy" class="w-full h-full object-cover">
 </div>
 </div>
 <p class="text-sm font-semibold uppercase tracking-[0.1em] text-stone-400 mb-6">Geoff Wilson</p>
@@ -301,7 +317,6 @@ Thank you. We will respond within 1 business day.
 </footer>
 
 <script>
-    window.scrollTo(0, 0);
     try { lucide.createIcons(); } catch(e) { console.warn('Lucide icons not loaded:', e); }
 
     const observerOptions = { threshold: 0.1 };
@@ -312,8 +327,20 @@ Thank you. We will respond within 1 business day.
     }, observerOptions);
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-        document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+    var mobileMenu = document.getElementById('mobileMenu');
+    var menuIcon = document.getElementById('menuIcon');
+    var closeIcon = document.getElementById('closeIcon');
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        });
     });
 
     document.getElementById('contactForm').addEventListener('submit', function(e) {
