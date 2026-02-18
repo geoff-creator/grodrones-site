@@ -224,50 +224,57 @@ Tell us about your operation and we’ll follow up within 1 business day.
 </div>
 </div>
 <div class="reveal delay-100 bg-white p-8 md:p-10 border border-stone-100 rounded-sm shadow-xl">
-<form onsubmit="event.preventDefault(); document.getElementById('successMsg').classList.remove('hidden');" class="space-y-5" id="contactForm">
+<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="space-y-5" id="contactForm">
+<input type="hidden" name="form-name" value="contact">
+<p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
 <div>
 <label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Your Name *</label>
-<input type="text" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Full name">
+<input type="text" name="name" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Full name">
 </div>
 <div class="grid grid-cols-2 gap-5">
 <div>
 <label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Email *</label>
-<input type="email" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Email address">
+<input type="email" name="email" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Email address">
 </div>
 <div>
 <label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Phone</label>
-<input type="tel" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Phone number">
+<input type="tel" name="phone" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Phone number">
 </div>
 </div>
 <div>
 <label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Preferred Contact Method</label>
-<select class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors">
+<select name="contact-method" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors">
 <option>Email</option>
 <option>Phone Call</option>
 <option>Text Message</option>
 </select>
 </div>
 <div>
-<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Field Address or Pin *</label>
-<input type="text" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Address, dropped pin, or coordinates">
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Field Location *</label>
+<input type="text" name="field-location" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Address, dropped pin, or coordinates">
 </div>
 <div>
+<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Timing Window / Requirements *</label>
+<textarea name="timing-window" required class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors h-24" placeholder="Timing window and any requirements"></textarea>
+</div>
+<div>
+<p class="text-xs uppercase tracking-[0.1em] font-bold text-stone-300 mb-4 mt-2">Optional</p>
+<div class="space-y-5">
+<div>
 <label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Operation Name</label>
-<input type="text" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="e.g. Willamette Estate">
+<input type="text" name="operation-name" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="e.g. Willamette Estate">
 </div>
 <div class="grid grid-cols-2 gap-5">
 <div>
 <label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Crop</label>
-<input type="text" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="e.g. Pinot Noir">
+<input type="text" name="crop" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="e.g. Pinot Noir">
 </div>
 <div>
 <label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Acreage</label>
-<input type="text" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Acres">
+<input type="text" name="acreage" class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors" placeholder="Acres">
 </div>
 </div>
-<div>
-<label class="block text-xs uppercase tracking-[0.1em] font-bold text-stone-400 mb-2">Timing Window / Requirements</label>
-<textarea class="w-full bg-stone-50 border border-stone-200 px-5 py-3 focus:outline-none focus:border-accent-green transition-colors h-24" placeholder="Timing window and any requirements"></textarea>
+</div>
 </div>
 
 <button type="submit" class="w-full bg-accent-green text-white py-4 font-bold uppercase tracking-widest text-base btn-primary transition-all shadow-md mt-4">Request Scheduling</button>
@@ -307,6 +314,21 @@ Thank you. We will respond within 1 business day.
 
     document.getElementById('mobileMenuBtn').addEventListener('click', () => {
         document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = e.target;
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(form)).toString()
+        }).then(function() {
+            form.reset();
+            document.getElementById('successMsg').classList.remove('hidden');
+        }).catch(function() {
+            alert('Something went wrong. Please try again.');
+        });
     });
 </script>
 </body>
