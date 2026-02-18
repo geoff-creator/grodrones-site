@@ -224,7 +224,7 @@ Tell us about your operation and we’ll follow up within 1 business day.
 </div>
 </div>
 <div class="reveal delay-100 bg-white p-8 md:p-10 border border-stone-100 rounded-sm shadow-xl">
-<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="space-y-5" id="contactForm">
+<form name="contact" method="POST" action="/thanks.html" data-netlify="true" data-netlify-honeypot="bot-field" class="space-y-5" id="contactForm">
 <input type="hidden" name="form-name" value="contact">
 <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
 <div>
@@ -321,10 +321,17 @@ Thank you. We will respond within 1 business day.
         var form = e.target;
         var successMsg = document.getElementById('successMsg');
         successMsg.classList.add('hidden');
-        fetch('/', {
+        var inputs = form.querySelectorAll('input, select, textarea');
+        var parts = [];
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].name) {
+                parts.push(encodeURIComponent(inputs[i].name) + '=' + encodeURIComponent(inputs[i].value));
+            }
+        }
+        fetch(form.action || '/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(new FormData(form)).toString()
+            body: parts.join('&')
         }).then(function(response) {
             if (response.ok) {
                 form.reset();
