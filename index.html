@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="preload" as="image" href="Aerial_Application.jpg">
 <title>GroDrones | Precision Aerial Application for Oregon Agriculture</title>
 <meta name="description" content="Oregon-based drone aerial application and NDVI crop scouting for vineyards, orchards, nurseries, and specialty crops. Fast scheduling, clear documentation, and low ground impact.">
 <meta property="og:title" content="GroDrones | Precision Aerial Application for Oregon Agriculture">
@@ -11,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="/Aerial_Application.jpg">
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@0.574.0"></script>
+<script src="https://unpkg.com/lucide@0.574.0" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -99,6 +100,7 @@ color: #6b4220;
 <div class="absolute inset-0 z-0">
 <img src="Aerial_Application.jpg"
 alt="Oregon Agriculture Landscape"
+fetchpriority="high"
 class="w-full h-full object-cover">
 <div class="absolute inset-0 hero-overlay"></div>
 </div>
@@ -317,7 +319,13 @@ Thank you. We will respond within 1 business day.
 </footer>
 
 <script>
-    try { lucide.createIcons(); } catch(e) { console.warn('Lucide icons not loaded:', e); }
+    if (typeof lucide !== 'undefined') {
+        try { lucide.createIcons(); } catch(e) { console.warn('Lucide icons not loaded:', e); }
+    } else {
+        document.querySelector('script[src*="lucide"]').addEventListener('load', function() {
+            try { lucide.createIcons(); } catch(e) { console.warn('Lucide icons not loaded:', e); }
+        });
+    }
 
     const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
