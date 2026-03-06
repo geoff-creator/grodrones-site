@@ -6,76 +6,93 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 const banner = document.getElementById("statusBanner");
+const confidenceLine = document.getElementById("confidence");
+const debugLine = document.getElementById("debug");
 const details = document.getElementById("weatherDetails");
 
 let marker;
 
 map.on("click", async (event) => {
   const { lat, lng } = event.latlng;
-
-  if (marker) map.removeLayer(marker);
+  if (marker) {
+    map.removeLayer(marker);
+  }
   marker = L.marker([lat, lng]).addTo(map);
 
-  setBanner("pending", "Loading NOAA weather data...");
+  setBanner("pending", "Loading NOAA hourly conditions...");
+  confidenceLine.textContent = "Confidence: —";
+  debugLine.textContent = "Debug: —";
   updateDetail("Location", `${lat.toFixed(4)}, ${lng.toFixed(4)}`);
 
   try {
-    const pointResponse = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lng.toFixed(4)}`);
-    if (!pointResponse.ok) throw new Error("Failed to resolve NOAA point.");
-
-    const pointData = await pointResponse.json();
-    const hourlyUrl = pointData?.properties?.forecastHourly;
-    const gridUrl = pointData?.properties?.forecastGridData;
-
-    if (!hourlyUrl || !gridUrl) throw new Error("NOAA point response missing forecast URLs.");
-
-    const [hourlyResponse, gridResponse] = await Promise.all([fetch(hourlyUrl), fetch(gridUrl)]);
-    if (!hourlyResponse.ok || !gridResponse.ok) throw new Error("Failed to retrieve NOAA forecast data.");
-
-    const hourlyData = await hourlyResponse.json();
-    const gridData = await gridResponse.json();
-
-    const period = hourlyData?.properties?.periods?.[0];
-    if (!period) throw new Error("No hourly forecast period available.");
-
-    const windSpeedMph = parseWindSpeed(period.windSpeed);
-    const windDirection = period.windDirection || "Unknown";
-    const rainProb = numberOrNull(period?.probabilityOfPrecipitation?.value) ?? 0;
-
-    const tempF = numberOrNull(period.temperature);
-
-    const humidity =
-      numberOrNull(period?.relativeHumidity?.value) ??
-      numberOrNull(gridData?.properties?.relativeHumidity?.values?.[0]?.value);
-
-    const windGustMs = numberOrNull(gridData?.properties?.windGust?.values?.[0]?.value);
-    const windGustMph = windGustMs != null ? windGustMs * 2.23694 : null;
-
-    if (tempF == null || humidity == null || windSpeedMph == null) {
-      throw new Error("Missing required weather fields.");
+    const pointRes = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lng.toFixed(4)}`);
+    if (!pointRes.ok) {
+      throw new Error("Could not resolve NOAA point data.");
     }
 
-    const deltaTF = computeDeltaTF(tempF, humidity);
-    const sprayStatus = determineSprayStatus({
-      windSpeedMph,
-      windGustMph,
-      rainProb,
+    const pointData = await pointRes.json();
+    const hourlyUrl = pointData?.properties?.forecastHourly;
+    if (!hourlyUrl) {
+      throw new Error("NOAA point response missing forecastHourly.");
+    }
+
+    const hourlyRes = await fetch(hourlyUrl);
+    if (!hourlyRes.ok) {
+      throw new Error("Could not load NOAA hourly forecast.");
+    }
+
+    const hourlyData = await hourlyRes.json();
+    const periods = hourlyData?.properties?.periods;
+    if (!Array.isArray(periods) || periods.length === 0) {
+      throw new Error("No hourly forecast periods available.");
+    }
+
+    const period = findCurrentPeriod(periods);
+    if (!period) {
+      throw new Error("Could not find an hourly period matching current time.");
+    }
+
+    const windSpeed = parseWindSpeed(period.windSpeed);
+    const windGust = parseWindSpeed(period.windGust);
+    const rainProb = numberOrNull(period?.probabilityOfPrecipitation?.value);
+    const tempF = numberOrNull(period.temperature);
+    const humidity = numberOrNull(period?.relativeHumidity?.value);
+    const deltaT = tempF != null && humidity != null ? computeDeltaTF(tempF, humidity) : null;
+
+    debugLine.textContent = `Debug: startTime=${period.startTime || "n/a"}, endTime=${period.endTime || "n/a"}, raw windSpeed=${period.windSpeed || "n/a"}, raw windGust=${period.windGust || "n/a"}`;
+
+    updateDetail("Wind Speed", windSpeed == null ? "unavailable" : `${windSpeed.toFixed(1)} mph`);
+    updateDetail("Wind Gust", windGust == null ? "unavailable" : `${windGust.toFixed(1)} mph`);
+    updateDetail("Wind Direction", period.windDirection || "unavailable");
+    updateDetail("Temperature", tempF == null ? "unavailable" : `${tempF.toFixed(1)} °F`);
+    updateDetail("Humidity", humidity == null ? "unavailable" : `${humidity.toFixed(0)} %`);
+    updateDetail("Delta-T", deltaT == null ? "unavailable" : `${deltaT.toFixed(1)} °F`);
+    updateDetail("Rain Probability", rainProb == null ? "unavailable" : `${rainProb.toFixed(0)} %`);
+
+    const result = determineRecommendation({
+      windSpeed,
+      windGust,
+      rainProb: rainProb ?? 0,
+      deltaT,
     });
 
-    updateDetail("Temperature", `${tempF.toFixed(1)} °F`);
-    updateDetail("Humidity", `${humidity.toFixed(0)} %`);
-    updateDetail("Delta-T", `${deltaTF.toFixed(1)} °F`);
-    updateDetail("Wind Speed", `${windSpeedMph.toFixed(1)} mph`);
-    updateDetail("Wind Gust", windGustMph == null ? "N/A" : `${windGustMph.toFixed(1)} mph`);
-    updateDetail("Wind Direction", windDirection);
-    updateDetail("Precipitation Probability", `${rainProb.toFixed(0)} %`);
-
-    setBanner(sprayStatus.level, sprayStatus.message);
+    setBanner(result.level, `${capitalize(result.level)}: ${result.reason}`);
+    confidenceLine.textContent = `Confidence: ${assessConfidence({ windSpeed, windGust, tempF, humidity })}`;
   } catch (error) {
     console.error(error);
     setBanner("red", "Unable to load conditions for this location.");
+    confidenceLine.textContent = "Confidence: Low";
   }
 });
+
+function findCurrentPeriod(periods) {
+  const now = Date.now();
+  return periods.find((period) => {
+    const start = Date.parse(period.startTime);
+    const end = Date.parse(period.endTime);
+    return Number.isFinite(start) && Number.isFinite(end) && start <= now && now < end;
+  });
+}
 
 function setBanner(level, text) {
   banner.className = `status ${level}`;
@@ -83,20 +100,21 @@ function setBanner(level, text) {
 }
 
 function updateDetail(label, value) {
-  const item = [...details.querySelectorAll("div")].find(
+  const row = [...details.querySelectorAll("div")].find(
     (node) => node.querySelector("dt")?.textContent === label,
   );
-  if (!item) return;
-  item.querySelector("dd").textContent = value;
+  if (row) {
+    row.querySelector("dd").textContent = value;
+  }
 }
 
 function numberOrNull(value) {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
-function parseWindSpeed(windSpeedText) {
-  if (!windSpeedText || typeof windSpeedText !== "string") return null;
-  const nums = windSpeedText.match(/\d+/g)?.map(Number);
+function parseWindSpeed(raw) {
+  if (typeof raw !== "string") return null;
+  const nums = raw.match(/\d+(?:\.\d+)?/g)?.map(Number);
   if (!nums || nums.length === 0) return null;
   if (nums.length === 1) return nums[0];
   return (nums[0] + nums[1]) / 2;
@@ -105,8 +123,6 @@ function parseWindSpeed(windSpeedText) {
 function computeDeltaTF(tempF, humidityPercent) {
   const tempC = (tempF - 32) * (5 / 9);
   const rh = Math.max(1, Math.min(100, humidityPercent));
-
-  // Stull approximation for wet-bulb temperature in °C
   const wetBulbC =
     tempC * Math.atan(0.151977 * Math.sqrt(rh + 8.313659)) +
     Math.atan(tempC + rh) -
@@ -114,31 +130,47 @@ function computeDeltaTF(tempF, humidityPercent) {
     0.00391838 * Math.pow(rh, 1.5) * Math.atan(0.023101 * rh) -
     4.686035;
 
-  const deltaTC = tempC - wetBulbC;
-  return deltaTC * (9 / 5);
+  return (tempC - wetBulbC) * (9 / 5);
 }
 
-function determineSprayStatus({ windSpeedMph, windGustMph, rainProb }) {
-  const gust = windGustMph ?? 0;
-
-  const isRed = windSpeedMph > 15 || gust > 20 || rainProb >= 30;
-  if (isRed) {
-    return { level: "red", message: "Red: Do not spray" };
+function determineRecommendation({ windSpeed, windGust, rainProb, deltaT }) {
+  if (windSpeed == null) {
+    return { level: "yellow", reason: "Wind speed unavailable; use caution" };
   }
 
-  const isGreen = windSpeedMph >= 3 && windSpeedMph <= 10 && gust < 15 && rainProb < 30;
-  if (isGreen) {
-    return { level: "green", message: "Green: Good spray conditions" };
+  const red =
+    windSpeed > 15 ||
+    (windGust != null && windGust > 20) ||
+    rainProb >= 30 ||
+    (deltaT != null && (deltaT < 3.6 || deltaT > 18));
+
+  if (red) {
+    return { level: "red", reason: "Do not spray" };
   }
 
-  const isYellow =
-    (windSpeedMph >= 0 && windSpeedMph < 3) ||
-    (windSpeedMph > 10 && windSpeedMph <= 15) ||
-    (gust >= 15 && gust <= 20);
+  const green =
+    windSpeed >= 3 &&
+    windSpeed <= 10 &&
+    (windGust == null || windGust < 15) &&
+    rainProb < 30 &&
+    deltaT != null &&
+    deltaT >= 5.4 &&
+    deltaT <= 14.4;
 
-  if (isYellow) {
-    return { level: "yellow", message: "Yellow: Marginal" };
+  if (green) {
+    return { level: "green", reason: "Good spray window" };
   }
 
-  return { level: "yellow", message: "Yellow: Marginal" };
+  return { level: "yellow", reason: "Marginal conditions" };
+}
+
+function assessConfidence({ windSpeed, windGust, tempF, humidity }) {
+  const missingCount = [windSpeed, windGust, tempF, humidity].filter((v) => v == null).length;
+  if (missingCount === 0) return "High";
+  if (missingCount === 1) return "Medium";
+  return "Low";
+}
+
+function capitalize(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }
