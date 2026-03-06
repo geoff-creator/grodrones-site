@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Willamette Valley Spray Conditions</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <a class="back-link" href="/">← Back to GroDrones</a>
+      <h1>Willamette Valley Spray Conditions</h1>
+
+      <p class="instructions">
+        Tap or click a location on the map to evaluate spray conditions using NOAA weather data.
+      </p>
+
+      <section id="map" aria-label="Map of Willamette Valley"></section>
+
+      <section id="statusBanner" class="status pending" aria-live="polite">
+        Select a map location to load conditions.
+      </section>
+
+      <section class="card">
+        <h2>Current Inputs</h2>
+        <dl id="weatherDetails" class="details">
+          <div><dt>Location</dt><dd>—</dd></div>
+          <div><dt>Temperature</dt><dd>—</dd></div>
+          <div><dt>Humidity</dt><dd>—</dd></div>
+          <div><dt>Delta-T</dt><dd>—</dd></div>
+          <div><dt>Wind Speed</dt><dd>—</dd></div>
+          <div><dt>Wind Gust</dt><dd>—</dd></div>
+          <div><dt>Confidence</dt><dd>—</dd></div>
+          <div><dt>Wind Direction</dt><dd>—</dd></div>
+          <div><dt>Precipitation Probability</dt><dd>—</dd></div>
+        </dl>
+        <p id="dataSourceNote" class="source-note">Debug source: waiting for NOAA field selection.</p>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
