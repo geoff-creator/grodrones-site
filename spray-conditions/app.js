@@ -1,8 +1,30 @@
+// ── Configuration ──────────────────────────────────────────────
+const SPRAY_RULES = {
+  wind: { green: [3, 10], yellow: [0, 15], red: 15 },
+  gust: { green: 15, yellow: 20, red: 20 },
+  rain: { green: 30, red: 30 },
+  deltaT: {
+    red_low: 3.6,       // < 3.6 F → Red (inversion / humidity)
+    yellow_low: 5.4,    // 3.6–5.4 F → Yellow
+    green_low: 5.4,     // 5.4–14.4 F → Green
+    green_high: 14.4,
+    yellow_high: 18,    // 14.4–18 F → Yellow
+    red_high: 18,       // > 18 F → Red (evaporation)
+  },
+};
+
+const NOAA_HEADERS = {
+  Accept: "application/geo+json",
+  "User-Agent": "(GroDrones Spray Conditions, geoff@grodrones.com)",
+};
+
+// ── Map setup ──────────────────────────────────────────────────
 const map = L.map("map").setView([44.95, -123.0], 8);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
 const banner = document.getElementById("statusBanner");
@@ -11,7 +33,9 @@ const debugLine = document.getElementById("debug");
 const details = document.getElementById("weatherDetails");
 
 let marker;
+let activeController = null;
 
+// ── Map click handler ──────────────────────────────────────────
 map.on("click", async (event) => {
   const { lat, lng } = event.latlng;
   if (marker) {
@@ -23,6 +47,7 @@ map.on("click", async (event) => {
   confidenceLine.textContent = "Confidence: —";
   debugLine.textContent = "Debug: —";
   updateDetail("Location", `${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+  clearDetails();
 
   try {
     const pointRes = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lng.toFixed(4)}`);
@@ -79,6 +104,7 @@ map.on("click", async (event) => {
     setBanner(result.level, `${capitalize(result.level)}: ${result.reason}`);
     confidenceLine.textContent = `Confidence: ${assessConfidence({ windSpeed, windGust, tempF, humidity })}`;
   } catch (error) {
+    if (error.name === "AbortError") return; // superseded click
     console.error(error);
     setBanner("red", "Unable to load conditions for this location.");
     confidenceLine.textContent = "Confidence: Low";
@@ -108,6 +134,7 @@ function updateDetail(label, value) {
   }
 }
 
+// ── Utility functions ──────────────────────────────────────────
 function numberOrNull(value) {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
@@ -116,8 +143,7 @@ function parseWindSpeed(raw) {
   if (typeof raw !== "string") return null;
   const nums = raw.match(/\d+(?:\.\d+)?/g)?.map(Number);
   if (!nums || nums.length === 0) return null;
-  if (nums.length === 1) return nums[0];
-  return (nums[0] + nums[1]) / 2;
+  return nums.length === 1 ? nums[0] : (nums[0] + nums[1]) / 2;
 }
 
 function computeDeltaTF(tempF, humidityPercent) {
