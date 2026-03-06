@@ -28,6 +28,8 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 const banner = document.getElementById("statusBanner");
+const confidenceLine = document.getElementById("confidence");
+const debugLine = document.getElementById("debug");
 const details = document.getElementById("weatherDetails");
 
 let marker;
@@ -36,277 +38,100 @@ let activeController = null;
 // ── Map click handler ──────────────────────────────────────────
 map.on("click", async (event) => {
   const { lat, lng } = event.latlng;
-
-  // Cancel any in-flight requests
-  if (activeController) activeController.abort();
-  activeController = new AbortController();
-  const signal = activeController.signal;
-
-  if (marker) map.removeLayer(marker);
+  if (marker) {
+    map.removeLayer(marker);
+  }
   marker = L.marker([lat, lng]).addTo(map);
 
-  setBanner("pending", "Loading weather data\u2026");
+  setBanner("pending", "Loading NOAA hourly conditions...");
+  confidenceLine.textContent = "Confidence: —";
+  debugLine.textContent = "Debug: —";
   updateDetail("Location", `${lat.toFixed(4)}, ${lng.toFixed(4)}`);
   clearDetails();
 
   try {
-    // 1. Resolve NOAA grid point
-    const pointData = await noaaFetch(
-      `https://api.weather.gov/points/${lat.toFixed(4)},${lng.toFixed(4)}`,
-      signal
-    );
+    const pointRes = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lng.toFixed(4)}`);
+    if (!pointRes.ok) {
+      throw new Error("Could not resolve NOAA point data.");
+    }
 
+    const pointData = await pointRes.json();
     const hourlyUrl = pointData?.properties?.forecastHourly;
-    const stationsUrl = pointData?.properties?.observationStations;
-
-    if (!hourlyUrl) throw new Error("NOAA point missing forecast URL.");
-
-    // 2. Fetch hourly forecast + observation stations in parallel
-    const fetches = [noaaFetch(hourlyUrl, signal)];
-    if (stationsUrl) fetches.push(noaaFetch(stationsUrl, signal));
-
-    const [hourlyData, stationsData] = await Promise.all(fetches);
-
-    // 3. Pick hourly period matching current time
-    const period = findCurrentPeriod(hourlyData?.properties?.periods);
-    if (!period) throw new Error("No hourly forecast period available.");
-
-    // 4. Try to get latest observation from nearest station
-    let observation = null;
-    if (stationsData?.features?.length) {
-      observation = await fetchLatestObservation(stationsData.features, signal);
+    if (!hourlyUrl) {
+      throw new Error("NOAA point response missing forecastHourly.");
     }
 
-    // 5. Extract values — prefer observation for "right now", forecast for planning
-    const windSpeedMph = extractWindSpeed(observation, period);
-    const windGustMph = extractWindGust(observation, period);
-    const windDirection = extractWindDirection(observation, period);
-    const tempF = extractTemperature(observation, period);
-    const humidity = extractHumidity(observation, period);
-    const rainProb =
-      numberOrNull(period?.probabilityOfPrecipitation?.value) ?? null;
-
-    if (windSpeedMph == null || tempF == null) {
-      throw new Error("Missing critical weather fields for this location.");
+    const hourlyRes = await fetch(hourlyUrl);
+    if (!hourlyRes.ok) {
+      throw new Error("Could not load NOAA hourly forecast.");
     }
 
-    // 6. Calculate Delta-T (needs temp + humidity)
-    const deltaTF = humidity != null ? computeDeltaTF(tempF, humidity) : null;
+    const hourlyData = await hourlyRes.json();
+    const periods = hourlyData?.properties?.periods;
+    if (!Array.isArray(periods) || periods.length === 0) {
+      throw new Error("No hourly forecast periods available.");
+    }
 
-    // 7. Determine spray status
-    const sprayStatus = determineSprayStatus({
-      windSpeedMph,
-      windGustMph,
-      deltaTF,
-      rainProb,
+    const period = findCurrentPeriod(periods);
+    if (!period) {
+      throw new Error("Could not find an hourly period matching current time.");
+    }
+
+    const windSpeed = parseWindSpeed(period.windSpeed);
+    const windGust = parseWindSpeed(period.windGust);
+    const rainProb = numberOrNull(period?.probabilityOfPrecipitation?.value);
+    const tempF = numberOrNull(period.temperature);
+    const humidity = numberOrNull(period?.relativeHumidity?.value);
+    const deltaT = tempF != null && humidity != null ? computeDeltaTF(tempF, humidity) : null;
+
+    debugLine.textContent = `Debug: startTime=${period.startTime || "n/a"}, endTime=${period.endTime || "n/a"}, raw windSpeed=${period.windSpeed || "n/a"}, raw windGust=${period.windGust || "n/a"}`;
+
+    updateDetail("Wind Speed", windSpeed == null ? "unavailable" : `${windSpeed.toFixed(1)} mph`);
+    updateDetail("Wind Gust", windGust == null ? "unavailable" : `${windGust.toFixed(1)} mph`);
+    updateDetail("Wind Direction", period.windDirection || "unavailable");
+    updateDetail("Temperature", tempF == null ? "unavailable" : `${tempF.toFixed(1)} °F`);
+    updateDetail("Humidity", humidity == null ? "unavailable" : `${humidity.toFixed(0)} %`);
+    updateDetail("Delta-T", deltaT == null ? "unavailable" : `${deltaT.toFixed(1)} °F`);
+    updateDetail("Rain Probability", rainProb == null ? "unavailable" : `${rainProb.toFixed(0)} %`);
+
+    const result = determineRecommendation({
+      windSpeed,
+      windGust,
+      rainProb: rainProb ?? 0,
+      deltaT,
     });
 
-    // 8. Populate UI
-    updateDetail("Temperature", `${tempF.toFixed(1)} \u00b0F`);
-    updateDetail("Humidity", humidity != null ? `${humidity.toFixed(0)}%` : "unavailable");
-    updateDetail("Delta-T", deltaTF != null ? `${deltaTF.toFixed(1)} \u00b0F` : "unavailable");
-    updateDetail("Wind Speed", `${windSpeedMph.toFixed(1)} mph`);
-    updateDetail(
-      "Wind Gust",
-      windGustMph != null ? `${windGustMph.toFixed(1)} mph` : "unavailable"
-    );
-    updateDetail("Wind Direction", windDirection);
-    updateDetail(
-      "Rain Probability",
-      rainProb != null ? `${rainProb.toFixed(0)}%` : "unavailable"
-    );
-
-    // Confidence
-    const missing = [
-      windGustMph == null,
-      humidity == null,
-      rainProb == null,
-    ].filter(Boolean).length;
-    const confidence = missing === 0 ? "High" : missing === 1 ? "Medium" : "Low";
-    updateDetail("Confidence", confidence);
-
-    // Data source
-    updateDetail(
-      "Source",
-      observation
-        ? `Observed (${observation._stationId}) + Forecast`
-        : "Forecast only"
-    );
-
-    setBanner(sprayStatus.level, sprayStatus.message);
+    setBanner(result.level, `${capitalize(result.level)}: ${result.reason}`);
+    confidenceLine.textContent = `Confidence: ${assessConfidence({ windSpeed, windGust, tempF, humidity })}`;
   } catch (error) {
     if (error.name === "AbortError") return; // superseded click
     console.error(error);
     setBanner("red", "Unable to load conditions for this location.");
+    confidenceLine.textContent = "Confidence: Low";
   }
 });
 
-// ── NOAA fetch helper ──────────────────────────────────────────
-async function noaaFetch(url, signal) {
-  const response = await fetch(url, { headers: NOAA_HEADERS, signal });
-  if (!response.ok) throw new Error(`NOAA request failed: ${response.status}`);
-  return response.json();
-}
-
-// ── Time-matching for hourly periods ───────────────────────────
 function findCurrentPeriod(periods) {
-  if (!periods || periods.length === 0) return null;
-  const now = new Date();
-  for (const p of periods) {
-    const start = new Date(p.startTime);
-    const end = new Date(p.endTime);
-    if (now >= start && now < end) return p;
-  }
-  // If no exact match, use the earliest future period, then fall back to first
-  const future = periods.find((p) => new Date(p.startTime) > now);
-  return future || periods[0];
+  const now = Date.now();
+  return periods.find((period) => {
+    const start = Date.parse(period.startTime);
+    const end = Date.parse(period.endTime);
+    return Number.isFinite(start) && Number.isFinite(end) && start <= now && now < end;
+  });
 }
 
-// ── Observation station fetch ──────────────────────────────────
-async function fetchLatestObservation(stations, signal) {
-  // Try the nearest 3 stations (they're ordered by distance from NOAA)
-  const candidates = stations.slice(0, 3);
-  for (const station of candidates) {
-    const stationId = station.properties?.stationIdentifier;
-    if (!stationId) continue;
-    try {
-      const url = `https://api.weather.gov/stations/${stationId}/observations/latest`;
-      const data = await noaaFetch(url, signal);
-      const props = data?.properties;
-      if (!props) continue;
-      // Check the observation isn't too stale (> 2 hours)
-      if (props.timestamp) {
-        const age = Date.now() - new Date(props.timestamp).getTime();
-        if (age > 2 * 60 * 60 * 1000) continue;
-      }
-      props._stationId = stationId;
-      return props;
-    } catch {
-      continue; // station failed, try next
-    }
-  }
-  return null;
+function setBanner(level, text) {
+  banner.className = `status ${level}`;
+  banner.textContent = text;
 }
 
-// ── Value extraction (observation preferred, forecast fallback) ─
-function extractWindSpeed(obs, period) {
-  // Observation windSpeed is in m/s (SI)
-  if (obs?.windSpeed?.value != null) {
-    return obs.windSpeed.value * 2.23694;
+function updateDetail(label, value) {
+  const row = [...details.querySelectorAll("div")].find(
+    (node) => node.querySelector("dt")?.textContent === label,
+  );
+  if (row) {
+    row.querySelector("dd").textContent = value;
   }
-  return parseWindSpeedString(period?.windSpeed);
-}
-
-function extractWindGust(obs, period) {
-  // Observation windGust is in m/s (SI)
-  if (obs?.windGust?.value != null) {
-    return obs.windGust.value * 2.23694;
-  }
-  // Hourly forecast period.windGust — can be a string like "20 mph" or null
-  if (period?.windGust) {
-    return parseWindSpeedString(period.windGust);
-  }
-  return null;
-}
-
-function extractWindDirection(obs, period) {
-  if (obs?.windDirection?.value != null) {
-    return degreesToCardinal(obs.windDirection.value);
-  }
-  return period?.windDirection || "Unknown";
-}
-
-function extractTemperature(obs, period) {
-  // Observation temperature is in Celsius (SI)
-  if (obs?.temperature?.value != null) {
-    return obs.temperature.value * 9 / 5 + 32;
-  }
-  if (period?.temperature != null) {
-    if (period.temperatureUnit === "C") {
-      return period.temperature * 9 / 5 + 32;
-    }
-    return period.temperature;
-  }
-  return null;
-}
-
-function extractHumidity(obs, period) {
-  if (obs?.relativeHumidity?.value != null) {
-    return obs.relativeHumidity.value;
-  }
-  if (period?.relativeHumidity?.value != null) {
-    return period.relativeHumidity.value;
-  }
-  return null;
-}
-
-// ── Spray status logic ─────────────────────────────────────────
-function determineSprayStatus({ windSpeedMph, windGustMph, deltaTF, rainProb }) {
-  const reasons = [];
-  let dominated = "green"; // start optimistic
-
-  function escalate(level, reason) {
-    reasons.push(reason);
-    if (level === "red") dominated = "red";
-    else if (level === "yellow" && dominated !== "red") dominated = "yellow";
-  }
-
-  // ── Wind speed ──
-  if (windSpeedMph > SPRAY_RULES.wind.red) {
-    escalate("red", "High wind");
-  } else if (windSpeedMph > SPRAY_RULES.wind.yellow[1]) {
-    escalate("red", "High wind");
-  } else if (windSpeedMph > SPRAY_RULES.wind.green[1]) {
-    escalate("yellow", "Elevated wind");
-  } else if (windSpeedMph < SPRAY_RULES.wind.green[0]) {
-    escalate("yellow", "Low wind \u2014 possible inversion risk");
-  }
-
-  // ── Gusts ──
-  if (windGustMph != null) {
-    if (windGustMph > SPRAY_RULES.gust.red) {
-      escalate("red", "Dangerous gusts");
-    } else if (windGustMph >= SPRAY_RULES.gust.green) {
-      escalate("yellow", "Gusty conditions");
-    }
-  }
-
-  // ── Rain ──
-  if (rainProb != null && rainProb >= SPRAY_RULES.rain.red) {
-    escalate("red", "Rain likely");
-  }
-
-  // ── Delta-T ──
-  if (deltaTF != null) {
-    const dt = SPRAY_RULES.deltaT;
-    if (deltaTF < dt.red_low) {
-      escalate("red", "Delta-T too low \u2014 inversion risk");
-    } else if (deltaTF < dt.yellow_low) {
-      escalate("yellow", "Delta-T low");
-    } else if (deltaTF > dt.red_high) {
-      escalate("red", "Delta-T too high \u2014 evaporation risk");
-    } else if (deltaTF > dt.green_high) {
-      escalate("yellow", "Delta-T high");
-    }
-  }
-
-  // ── Build message ──
-  const labels = {
-    green: "Good spray conditions",
-    yellow: "Marginal",
-    red: "Do not spray",
-  };
-
-  let message = labels[dominated];
-  if (reasons.length > 0) {
-    message += " \u2014 " + reasons.join(", ");
-  }
-
-  const prefix = { green: "Green", yellow: "Yellow", red: "Red" };
-  return {
-    level: dominated,
-    message: `${prefix[dominated]}: ${message}`,
-  };
 }
 
 // ── Utility functions ──────────────────────────────────────────
@@ -314,9 +139,9 @@ function numberOrNull(value) {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
-function parseWindSpeedString(text) {
-  if (!text || typeof text !== "string") return null;
-  const nums = text.match(/\d+/g)?.map(Number);
+function parseWindSpeed(raw) {
+  if (typeof raw !== "string") return null;
+  const nums = raw.match(/\d+(?:\.\d+)?/g)?.map(Number);
   if (!nums || nums.length === 0) return null;
   return nums.length === 1 ? nums[0] : (nums[0] + nums[1]) / 2;
 }
@@ -324,8 +149,6 @@ function parseWindSpeedString(text) {
 function computeDeltaTF(tempF, humidityPercent) {
   const tempC = (tempF - 32) * (5 / 9);
   const rh = Math.max(1, Math.min(100, humidityPercent));
-
-  // Stull approximation for wet-bulb temperature in C
   const wetBulbC =
     tempC * Math.atan(0.151977 * Math.sqrt(rh + 8.313659)) +
     Math.atan(tempC + rh) -
@@ -333,31 +156,47 @@ function computeDeltaTF(tempF, humidityPercent) {
     0.00391838 * Math.pow(rh, 1.5) * Math.atan(0.023101 * rh) -
     4.686035;
 
-  const deltaTC = tempC - wetBulbC;
-  return deltaTC * (9 / 5);
+  return (tempC - wetBulbC) * (9 / 5);
 }
 
-function degreesToCardinal(deg) {
-  if (deg == null) return "Unknown";
-  const dirs = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
-                "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
-  return dirs[Math.round(deg / 22.5) % 16];
+function determineRecommendation({ windSpeed, windGust, rainProb, deltaT }) {
+  if (windSpeed == null) {
+    return { level: "yellow", reason: "Wind speed unavailable; use caution" };
+  }
+
+  const red =
+    windSpeed > 15 ||
+    (windGust != null && windGust > 20) ||
+    rainProb >= 30 ||
+    (deltaT != null && (deltaT < 3.6 || deltaT > 18));
+
+  if (red) {
+    return { level: "red", reason: "Do not spray" };
+  }
+
+  const green =
+    windSpeed >= 3 &&
+    windSpeed <= 10 &&
+    (windGust == null || windGust < 15) &&
+    rainProb < 30 &&
+    deltaT != null &&
+    deltaT >= 5.4 &&
+    deltaT <= 14.4;
+
+  if (green) {
+    return { level: "green", reason: "Good spray window" };
+  }
+
+  return { level: "yellow", reason: "Marginal conditions" };
 }
 
-// ── DOM helpers ────────────────────────────────────────────────
-function setBanner(level, text) {
-  banner.className = `status ${level}`;
-  banner.textContent = text;
+function assessConfidence({ windSpeed, windGust, tempF, humidity }) {
+  const missingCount = [windSpeed, windGust, tempF, humidity].filter((v) => v == null).length;
+  if (missingCount === 0) return "High";
+  if (missingCount === 1) return "Medium";
+  return "Low";
 }
 
-function updateDetail(label, value) {
-  const item = [...details.querySelectorAll("div")].find(
-    (node) => node.querySelector("dt")?.textContent === label
-  );
-  if (!item) return;
-  item.querySelector("dd").textContent = value;
-}
-
-function clearDetails() {
-  details.querySelectorAll("dd").forEach((dd) => (dd.textContent = "\u2014"));
+function capitalize(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }

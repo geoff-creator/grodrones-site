@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spray Conditions | GroDrones</title>
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Spray Conditions</title>
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -15,36 +14,29 @@
   </head>
   <body>
     <main class="container">
-      <nav class="top-nav">
-        <a href="/" class="home-link">&larr; GroDrones Home</a>
-      </nav>
+      <h1>Spray Conditions</h1>
+      <p class="instructions">Click a map location to load NOAA hourly conditions for right now.</p>
 
-      <h1>Willamette Valley Spray Conditions</h1>
-
-      <p class="instructions">
-        Click a location on the map to check current spray conditions using
-        observed weather station data and NOAA forecasts.
-      </p>
-
-      <section id="map" aria-label="Map of Willamette Valley"></section>
+      <section id="map" aria-label="Map for selecting spray location"></section>
 
       <section id="statusBanner" class="status pending" aria-live="polite">
-        Select a map location to load conditions.
+        Select a map location to evaluate current spray conditions.
       </section>
+
+      <p id="confidence" class="confidence">Confidence: —</p>
+      <p id="debug" class="debug">Debug: —</p>
 
       <section class="card">
         <h2>Current Conditions</h2>
         <dl id="weatherDetails" class="details">
-          <div><dt>Location</dt><dd>&mdash;</dd></div>
-          <div><dt>Temperature</dt><dd>&mdash;</dd></div>
-          <div><dt>Humidity</dt><dd>&mdash;</dd></div>
-          <div><dt>Delta-T</dt><dd>&mdash;</dd></div>
-          <div><dt>Wind Speed</dt><dd>&mdash;</dd></div>
-          <div><dt>Wind Gust</dt><dd>&mdash;</dd></div>
-          <div><dt>Wind Direction</dt><dd>&mdash;</dd></div>
-          <div><dt>Rain Probability</dt><dd>&mdash;</dd></div>
-          <div><dt>Confidence</dt><dd>&mdash;</dd></div>
-          <div><dt>Source</dt><dd>&mdash;</dd></div>
+          <div><dt>Location</dt><dd>—</dd></div>
+          <div><dt>Wind Speed</dt><dd>—</dd></div>
+          <div><dt>Wind Gust</dt><dd>—</dd></div>
+          <div><dt>Wind Direction</dt><dd>—</dd></div>
+          <div><dt>Temperature</dt><dd>—</dd></div>
+          <div><dt>Humidity</dt><dd>—</dd></div>
+          <div><dt>Delta-T</dt><dd>—</dd></div>
+          <div><dt>Rain Probability</dt><dd>—</dd></div>
         </dl>
       </section>
 
