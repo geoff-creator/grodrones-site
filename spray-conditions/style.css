@@ -25,19 +25,6 @@ body {
   padding: 1rem;
 }
 
-.back-link {
-  display: inline-block;
-  margin: 0.25rem 0 0.75rem;
-  color: #0f5d87;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.back-link:hover,
-.back-link:focus-visible {
-  text-decoration: underline;
-}
-
 h1 {
   margin: 0.5rem 0;
   font-size: clamp(1.5rem, 3vw, 2rem);
@@ -45,12 +32,6 @@ h1 {
 
 .instructions {
   margin-top: 0;
-}
-
-.version {
-  margin: 0 0 0.5rem;
-  font-size: 0.85rem;
-  color: #4b5d67;
 }
 
 #map {
@@ -117,12 +98,6 @@ h1 {
 
 .details dd {
   margin: 0;
-}
-
-.source-note {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  color: #4b5d67;
 }
 
 @media (max-width: 600px) {
