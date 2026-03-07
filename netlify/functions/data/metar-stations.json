@@ -1,0 +1,2606 @@
+[
+  {
+    "code": "KPDX",
+    "name": "Portland International Airport",
+    "lat": 45.5887,
+    "lon": -122.5975
+  },
+  {
+    "code": "KSLE",
+    "name": "McNary Field (Salem)",
+    "lat": 44.9095,
+    "lon": -123.0031
+  },
+  {
+    "code": "KEUG",
+    "name": "Mahlon Sweet Field (Eugene)",
+    "lat": 44.1246,
+    "lon": -123.219
+  },
+  {
+    "code": "KMFR",
+    "name": "Rogue Valley International Airport (Medford)",
+    "lat": 42.3742,
+    "lon": -122.8735
+  },
+  {
+    "code": "KRDM",
+    "name": "Redmond Municipal Airport",
+    "lat": 44.2541,
+    "lon": -121.15
+  },
+  {
+    "code": "KOTH",
+    "name": "Southwest Oregon Regional Airport (North Bend)",
+    "lat": 43.4171,
+    "lon": -124.246
+  },
+  {
+    "code": "KONP",
+    "name": "Newport Municipal Airport",
+    "lat": 44.5804,
+    "lon": -124.0579
+  },
+  {
+    "code": "KAST",
+    "name": "Astoria Regional Airport",
+    "lat": 46.158,
+    "lon": -123.8787
+  },
+  {
+    "code": "KUAO",
+    "name": "Aurora State Airport",
+    "lat": 45.2471,
+    "lon": -122.7703
+  },
+  {
+    "code": "KSPB",
+    "name": "Scappoose Industrial Airpark",
+    "lat": 45.771,
+    "lon": -122.8624
+  },
+  {
+    "code": "KCVO",
+    "name": "Corvallis Municipal Airport",
+    "lat": 44.4972,
+    "lon": -123.2898
+  },
+  {
+    "code": "KHIO",
+    "name": "Portland-Hillsboro Airport",
+    "lat": 45.5404,
+    "lon": -122.9498
+  },
+  {
+    "code": "KTTD",
+    "name": "Portland-Troutdale Airport",
+    "lat": 45.5494,
+    "lon": -122.4013
+  },
+  {
+    "code": "KMMU",
+    "name": "McMinnville Municipal Airport",
+    "lat": 45.1945,
+    "lon": -123.1359
+  },
+  {
+    "code": "KLMT",
+    "name": "Klamath Falls Airport",
+    "lat": 42.1561,
+    "lon": -121.7332
+  },
+  {
+    "code": "KBDN",
+    "name": "Bend Municipal Airport",
+    "lat": 44.0946,
+    "lon": -121.2003
+  },
+  {
+    "code": "KDLS",
+    "name": "Columbia Gorge Regional Airport (The Dalles)",
+    "lat": 45.6185,
+    "lon": -121.1673
+  },
+  {
+    "code": "KPDT",
+    "name": "Eastern Oregon Regional Airport (Pendleton)",
+    "lat": 45.6951,
+    "lon": -118.8414
+  },
+  {
+    "code": "KSXT",
+    "name": "Sexton Summit",
+    "lat": 42.6169,
+    "lon": -123.3717
+  },
+  {
+    "code": "KRBG",
+    "name": "Roseburg Regional Airport",
+    "lat": 43.2388,
+    "lon": -123.3558
+  },
+  {
+    "code": "KLGD",
+    "name": "La Grande/Union County Airport",
+    "lat": 45.2902,
+    "lon": -118.0071
+  },
+  {
+    "code": "KBKE",
+    "name": "Baker City Municipal Airport",
+    "lat": 44.8373,
+    "lon": -117.8089
+  },
+  {
+    "code": "KBNO",
+    "name": "Burns Municipal Airport",
+    "lat": 43.5919,
+    "lon": -118.9553
+  },
+  {
+    "code": "KCOE",
+    "name": "Coeur d'Alene Airport (Pappy Boyington Field)",
+    "lat": 47.7743,
+    "lon": -116.8196
+  },
+  {
+    "code": "KHRI",
+    "name": "Hermiston Municipal Airport",
+    "lat": 45.8282,
+    "lon": -119.2591
+  },
+  {
+    "code": "KONO",
+    "name": "Ontario Municipal Airport",
+    "lat": 44.0205,
+    "lon": -116.9612
+  },
+  {
+    "code": "KLKV",
+    "name": "Lake County Airport (Lakeview)",
+    "lat": 42.1611,
+    "lon": -120.3994
+  },
+  {
+    "code": "KTMK",
+    "name": "Tillamook Airport",
+    "lat": 45.4182,
+    "lon": -123.8144
+  },
+  {
+    "code": "KSEA",
+    "name": "Seattle-Tacoma International Airport",
+    "lat": 47.4502,
+    "lon": -122.3088
+  },
+  {
+    "code": "KBFI",
+    "name": "Boeing Field/King County International",
+    "lat": 47.53,
+    "lon": -122.3019
+  },
+  {
+    "code": "KPAE",
+    "name": "Paine Field (Everett)",
+    "lat": 47.9063,
+    "lon": -122.2816
+  },
+  {
+    "code": "KOLM",
+    "name": "Olympia Regional Airport",
+    "lat": 46.9694,
+    "lon": -122.9025
+  },
+  {
+    "code": "KGEG",
+    "name": "Spokane International Airport",
+    "lat": 47.6199,
+    "lon": -117.5338
+  },
+  {
+    "code": "KPSC",
+    "name": "Tri-Cities Airport (Pasco)",
+    "lat": 46.2647,
+    "lon": -119.1191
+  },
+  {
+    "code": "KYKM",
+    "name": "Yakima Air Terminal",
+    "lat": 46.5682,
+    "lon": -120.5441
+  },
+  {
+    "code": "KBLI",
+    "name": "Bellingham International Airport",
+    "lat": 48.7927,
+    "lon": -122.5375
+  },
+  {
+    "code": "KALW",
+    "name": "Walla Walla Regional Airport",
+    "lat": 46.0949,
+    "lon": -118.288
+  },
+  {
+    "code": "KEAT",
+    "name": "Pangborn Memorial Airport (Wenatchee)",
+    "lat": 47.3989,
+    "lon": -120.2069
+  },
+  {
+    "code": "KEPH",
+    "name": "Ephrata Municipal Airport",
+    "lat": 47.3076,
+    "lon": -119.5159
+  },
+  {
+    "code": "KRLD",
+    "name": "Richland Airport",
+    "lat": 46.3056,
+    "lon": -119.3042
+  },
+  {
+    "code": "KSFF",
+    "name": "Felts Field (Spokane)",
+    "lat": 47.6828,
+    "lon": -117.3226
+  },
+  {
+    "code": "KTCM",
+    "name": "McChord Field (JBLM)",
+    "lat": 47.1377,
+    "lon": -122.4765
+  },
+  {
+    "code": "KGRF",
+    "name": "Gray Army Airfield (JBLM)",
+    "lat": 47.0792,
+    "lon": -122.5808
+  },
+  {
+    "code": "KTIW",
+    "name": "Tacoma Narrows Airport",
+    "lat": 47.2679,
+    "lon": -122.5781
+  },
+  {
+    "code": "KRNT",
+    "name": "Renton Municipal Airport",
+    "lat": 47.4931,
+    "lon": -122.2157
+  },
+  {
+    "code": "KSHN",
+    "name": "Sanderson Field (Shelton)",
+    "lat": 47.2336,
+    "lon": -123.1476
+  },
+  {
+    "code": "KCLM",
+    "name": "William R. Fairchild International (Port Angeles)",
+    "lat": 48.1202,
+    "lon": -123.4997
+  },
+  {
+    "code": "KNUW",
+    "name": "NAS Whidbey Island",
+    "lat": 48.3518,
+    "lon": -122.6558
+  },
+  {
+    "code": "KORS",
+    "name": "Orcas Island Airport",
+    "lat": 48.7082,
+    "lon": -122.9106
+  },
+  {
+    "code": "KFHR",
+    "name": "Friday Harbor Airport",
+    "lat": 48.522,
+    "lon": -123.0244
+  },
+  {
+    "code": "KPWT",
+    "name": "Bremerton National Airport",
+    "lat": 47.4902,
+    "lon": -122.7649
+  },
+  {
+    "code": "KELN",
+    "name": "Bowers Field (Ellensburg)",
+    "lat": 47.033,
+    "lon": -120.5307
+  },
+  {
+    "code": "KOMK",
+    "name": "Omak Airport",
+    "lat": 48.4644,
+    "lon": -119.5178
+  },
+  {
+    "code": "KPUW",
+    "name": "Pullman-Moscow Regional Airport",
+    "lat": 46.7439,
+    "lon": -117.1096
+  },
+  {
+    "code": "KLWS",
+    "name": "Lewiston-Nez Perce County Airport",
+    "lat": 46.3745,
+    "lon": -117.0154
+  },
+  {
+    "code": "KMWH",
+    "name": "Grant County International Airport (Moses Lake)",
+    "lat": 47.2077,
+    "lon": -119.3202
+  },
+  {
+    "code": "KSKA",
+    "name": "Fairchild Air Force Base",
+    "lat": 47.6151,
+    "lon": -117.6556
+  },
+  {
+    "code": "KAWO",
+    "name": "Arlington Municipal Airport",
+    "lat": 48.1607,
+    "lon": -122.159
+  },
+  {
+    "code": "KHQM",
+    "name": "Bowerman Airport (Hoquiam)",
+    "lat": 46.9712,
+    "lon": -123.9366
+  },
+  {
+    "code": "KBVS",
+    "name": "Skagit Regional Airport (Burlington)",
+    "lat": 48.4709,
+    "lon": -122.4209
+  },
+  {
+    "code": "KKLS",
+    "name": "Kelso-Longview Airport",
+    "lat": 46.118,
+    "lon": -122.8984
+  },
+  {
+    "code": "KUIL",
+    "name": "Quillayute Airport",
+    "lat": 47.9366,
+    "lon": -124.5625
+  },
+  {
+    "code": "KCLS",
+    "name": "Chehalis-Centralia Airport",
+    "lat": 46.677,
+    "lon": -122.9833
+  },
+  {
+    "code": "KSMF",
+    "name": "Sacramento International Airport",
+    "lat": 38.6954,
+    "lon": -121.5908
+  },
+  {
+    "code": "KSFO",
+    "name": "San Francisco International Airport",
+    "lat": 37.6213,
+    "lon": -122.379
+  },
+  {
+    "code": "KLAX",
+    "name": "Los Angeles International Airport",
+    "lat": 33.9425,
+    "lon": -118.4081
+  },
+  {
+    "code": "KSAN",
+    "name": "San Diego International Airport",
+    "lat": 32.7336,
+    "lon": -117.1897
+  },
+  {
+    "code": "KOAK",
+    "name": "Oakland International Airport",
+    "lat": 37.7213,
+    "lon": -122.2208
+  },
+  {
+    "code": "KSJC",
+    "name": "San Jose International Airport",
+    "lat": 37.3626,
+    "lon": -121.9291
+  },
+  {
+    "code": "KFAT",
+    "name": "Fresno Yosemite International Airport",
+    "lat": 36.7762,
+    "lon": -119.7181
+  },
+  {
+    "code": "KBFL",
+    "name": "Meadows Field Airport (Bakersfield)",
+    "lat": 35.4336,
+    "lon": -119.0568
+  },
+  {
+    "code": "KMOD",
+    "name": "Modesto City-County Airport",
+    "lat": 37.6258,
+    "lon": -120.9544
+  },
+  {
+    "code": "KMER",
+    "name": "Castle Airport (Merced)",
+    "lat": 37.3805,
+    "lon": -120.5682
+  },
+  {
+    "code": "KVIS",
+    "name": "Visalia Municipal Airport",
+    "lat": 36.3187,
+    "lon": -119.3929
+  },
+  {
+    "code": "KRDD",
+    "name": "Redding Municipal Airport",
+    "lat": 40.509,
+    "lon": -122.2934
+  },
+  {
+    "code": "KUKI",
+    "name": "Ukiah Municipal Airport",
+    "lat": 39.126,
+    "lon": -123.2009
+  },
+  {
+    "code": "KSTS",
+    "name": "Charles M. Schulz Sonoma County Airport",
+    "lat": 38.509,
+    "lon": -122.8128
+  },
+  {
+    "code": "KSBA",
+    "name": "Santa Barbara Airport",
+    "lat": 34.4262,
+    "lon": -119.8404
+  },
+  {
+    "code": "KOXR",
+    "name": "Oxnard Airport",
+    "lat": 34.2001,
+    "lon": -119.2072
+  },
+  {
+    "code": "KPSP",
+    "name": "Palm Springs International Airport",
+    "lat": 33.8297,
+    "lon": -116.5067
+  },
+  {
+    "code": "KSAC",
+    "name": "Sacramento Executive Airport",
+    "lat": 38.5125,
+    "lon": -121.4935
+  },
+  {
+    "code": "KMRY",
+    "name": "Monterey Regional Airport",
+    "lat": 36.587,
+    "lon": -121.843
+  },
+  {
+    "code": "KBOI",
+    "name": "Boise Airport",
+    "lat": 43.5644,
+    "lon": -116.2228
+  },
+  {
+    "code": "KTWF",
+    "name": "Joslin Field Magic Valley (Twin Falls)",
+    "lat": 42.4818,
+    "lon": -114.4877
+  },
+  {
+    "code": "KSUN",
+    "name": "Friedman Memorial Airport (Sun Valley)",
+    "lat": 43.5044,
+    "lon": -114.2962
+  },
+  {
+    "code": "KIDA",
+    "name": "Idaho Falls Regional Airport",
+    "lat": 43.5146,
+    "lon": -112.0708
+  },
+  {
+    "code": "KPIH",
+    "name": "Pocatello Regional Airport",
+    "lat": 42.9098,
+    "lon": -112.596
+  },
+  {
+    "code": "KMLP",
+    "name": "Mullan Pass Airport",
+    "lat": 47.4505,
+    "lon": -115.6489
+  },
+  {
+    "code": "KMSO",
+    "name": "Missoula Montana Airport",
+    "lat": 46.9163,
+    "lon": -114.0906
+  },
+  {
+    "code": "KGTF",
+    "name": "Great Falls International Airport",
+    "lat": 47.482,
+    "lon": -111.3707
+  },
+  {
+    "code": "KBZN",
+    "name": "Bozeman Yellowstone International Airport",
+    "lat": 45.7775,
+    "lon": -111.153
+  },
+  {
+    "code": "KHLN",
+    "name": "Helena Regional Airport",
+    "lat": 46.6068,
+    "lon": -111.9827
+  },
+  {
+    "code": "KBTM",
+    "name": "Bert Mooney Airport (Butte)",
+    "lat": 45.9548,
+    "lon": -112.4972
+  },
+  {
+    "code": "KBIL",
+    "name": "Billings Logan International Airport",
+    "lat": 45.8077,
+    "lon": -108.5428
+  },
+  {
+    "code": "KGGW",
+    "name": "Glasgow Airport",
+    "lat": 48.2125,
+    "lon": -106.6147
+  },
+  {
+    "code": "KRNO",
+    "name": "Reno-Tahoe International Airport",
+    "lat": 39.4991,
+    "lon": -119.7681
+  },
+  {
+    "code": "KLAS",
+    "name": "Harry Reid International Airport (Las Vegas)",
+    "lat": 36.084,
+    "lon": -115.1537
+  },
+  {
+    "code": "KSLC",
+    "name": "Salt Lake City International Airport",
+    "lat": 40.7884,
+    "lon": -111.9778
+  },
+  {
+    "code": "KOGD",
+    "name": "Ogden-Hinckley Airport",
+    "lat": 41.1961,
+    "lon": -112.0122
+  },
+  {
+    "code": "KPVU",
+    "name": "Provo Municipal Airport",
+    "lat": 40.2192,
+    "lon": -111.7235
+  },
+  {
+    "code": "KCDC",
+    "name": "Cedar City Regional Airport",
+    "lat": 37.701,
+    "lon": -113.0986
+  },
+  {
+    "code": "KDEN",
+    "name": "Denver International Airport",
+    "lat": 39.8561,
+    "lon": -104.6737
+  },
+  {
+    "code": "KCOS",
+    "name": "Colorado Springs Airport",
+    "lat": 38.8058,
+    "lon": -104.7008
+  },
+  {
+    "code": "KASE",
+    "name": "Aspen-Pitkin County Airport",
+    "lat": 39.2232,
+    "lon": -106.8688
+  },
+  {
+    "code": "KGJT",
+    "name": "Grand Junction Regional Airport",
+    "lat": 39.1224,
+    "lon": -108.5267
+  },
+  {
+    "code": "KDRO",
+    "name": "Durango-La Plata County Airport",
+    "lat": 37.1515,
+    "lon": -107.7538
+  },
+  {
+    "code": "KPUB",
+    "name": "Pueblo Memorial Airport",
+    "lat": 38.2891,
+    "lon": -104.4966
+  },
+  {
+    "code": "KGLD",
+    "name": "Renner Field (Goodland)",
+    "lat": 39.3706,
+    "lon": -101.699
+  },
+  {
+    "code": "KPHX",
+    "name": "Phoenix Sky Harbor International Airport",
+    "lat": 33.4373,
+    "lon": -112.0078
+  },
+  {
+    "code": "KTUS",
+    "name": "Tucson International Airport",
+    "lat": 32.1161,
+    "lon": -110.941
+  },
+  {
+    "code": "KFLG",
+    "name": "Flagstaff Pulliam Airport",
+    "lat": 35.1385,
+    "lon": -111.6712
+  },
+  {
+    "code": "KPRC",
+    "name": "Ernest A. Love Field (Prescott)",
+    "lat": 34.6545,
+    "lon": -112.4196
+  },
+  {
+    "code": "KYUM",
+    "name": "Yuma International Airport",
+    "lat": 32.6566,
+    "lon": -114.606
+  },
+  {
+    "code": "KABQ",
+    "name": "Albuquerque International Sunport",
+    "lat": 35.0402,
+    "lon": -106.6092
+  },
+  {
+    "code": "KSAF",
+    "name": "Santa Fe Regional Airport",
+    "lat": 35.6171,
+    "lon": -106.0892
+  },
+  {
+    "code": "KROW",
+    "name": "Roswell International Air Center",
+    "lat": 33.3016,
+    "lon": -104.5307
+  },
+  {
+    "code": "KLRU",
+    "name": "Las Cruces International Airport",
+    "lat": 32.2894,
+    "lon": -106.9219
+  },
+  {
+    "code": "KELP",
+    "name": "El Paso International Airport",
+    "lat": 31.8072,
+    "lon": -106.3776
+  },
+  {
+    "code": "KDFW",
+    "name": "Dallas/Fort Worth International Airport",
+    "lat": 32.8998,
+    "lon": -97.0403
+  },
+  {
+    "code": "KIAH",
+    "name": "George Bush Intercontinental Airport (Houston)",
+    "lat": 29.9844,
+    "lon": -95.3414
+  },
+  {
+    "code": "KHOU",
+    "name": "William P. Hobby Airport (Houston)",
+    "lat": 29.6454,
+    "lon": -95.2789
+  },
+  {
+    "code": "KSAT",
+    "name": "San Antonio International Airport",
+    "lat": 29.5337,
+    "lon": -98.4698
+  },
+  {
+    "code": "KAUS",
+    "name": "Austin-Bergstrom International Airport",
+    "lat": 30.1945,
+    "lon": -97.6699
+  },
+  {
+    "code": "KAMA",
+    "name": "Rick Husband Amarillo International Airport",
+    "lat": 35.2194,
+    "lon": -101.7059
+  },
+  {
+    "code": "KLBB",
+    "name": "Lubbock Preston Smith International Airport",
+    "lat": 33.6636,
+    "lon": -101.8227
+  },
+  {
+    "code": "KMAF",
+    "name": "Midland International Airport",
+    "lat": 31.9425,
+    "lon": -102.2019
+  },
+  {
+    "code": "KABI",
+    "name": "Abilene Regional Airport",
+    "lat": 32.4113,
+    "lon": -99.6819
+  },
+  {
+    "code": "KSPS",
+    "name": "Wichita Falls Municipal Airport",
+    "lat": 33.9888,
+    "lon": -98.4919
+  },
+  {
+    "code": "KCLL",
+    "name": "Easterwood Field (College Station)",
+    "lat": 30.5886,
+    "lon": -96.3638
+  },
+  {
+    "code": "KMCI",
+    "name": "Kansas City International Airport",
+    "lat": 39.2976,
+    "lon": -94.7139
+  },
+  {
+    "code": "KICT",
+    "name": "Wichita Eisenhower National Airport",
+    "lat": 37.6499,
+    "lon": -97.4331
+  },
+  {
+    "code": "KTOP",
+    "name": "Philip Billard Municipal Airport (Topeka)",
+    "lat": 39.0687,
+    "lon": -95.6225
+  },
+  {
+    "code": "KGCK",
+    "name": "Garden City Regional Airport",
+    "lat": 37.9275,
+    "lon": -100.7244
+  },
+  {
+    "code": "KOKC",
+    "name": "Will Rogers World Airport (Oklahoma City)",
+    "lat": 35.3931,
+    "lon": -97.6007
+  },
+  {
+    "code": "KTUL",
+    "name": "Tulsa International Airport",
+    "lat": 36.1984,
+    "lon": -95.8881
+  },
+  {
+    "code": "KLAW",
+    "name": "Lawton-Fort Sill Regional Airport",
+    "lat": 34.5677,
+    "lon": -98.4166
+  },
+  {
+    "code": "KEND",
+    "name": "Vance Air Force Base (Enid)",
+    "lat": 36.3392,
+    "lon": -97.9165
+  },
+  {
+    "code": "KOMN",
+    "name": "Ormond Beach Municipal Airport",
+    "lat": 29.3006,
+    "lon": -81.1128
+  },
+  {
+    "code": "KMSP",
+    "name": "Minneapolis-Saint Paul International Airport",
+    "lat": 44.8848,
+    "lon": -93.2223
+  },
+  {
+    "code": "KDLH",
+    "name": "Duluth International Airport",
+    "lat": 46.8421,
+    "lon": -92.1936
+  },
+  {
+    "code": "KRST",
+    "name": "Rochester International Airport",
+    "lat": 43.9083,
+    "lon": -92.5
+  },
+  {
+    "code": "KSTC",
+    "name": "St. Cloud Regional Airport",
+    "lat": 45.5466,
+    "lon": -94.0593
+  },
+  {
+    "code": "KFAR",
+    "name": "Hector International Airport (Fargo)",
+    "lat": 46.9207,
+    "lon": -96.8158
+  },
+  {
+    "code": "KBIS",
+    "name": "Bismarck Airport",
+    "lat": 46.7727,
+    "lon": -100.7468
+  },
+  {
+    "code": "KMOT",
+    "name": "Minot International Airport",
+    "lat": 48.2594,
+    "lon": -101.2803
+  },
+  {
+    "code": "KGFK",
+    "name": "Grand Forks International Airport",
+    "lat": 47.9493,
+    "lon": -97.1761
+  },
+  {
+    "code": "KFSD",
+    "name": "Sioux Falls Regional Airport",
+    "lat": 43.582,
+    "lon": -96.7419
+  },
+  {
+    "code": "KRAP",
+    "name": "Rapid City Regional Airport",
+    "lat": 44.0453,
+    "lon": -103.0574
+  },
+  {
+    "code": "KABR",
+    "name": "Aberdeen Regional Airport",
+    "lat": 45.4491,
+    "lon": -98.4218
+  },
+  {
+    "code": "KOMA",
+    "name": "Eppley Airfield (Omaha)",
+    "lat": 41.3032,
+    "lon": -95.8941
+  },
+  {
+    "code": "KLNK",
+    "name": "Lincoln Airport",
+    "lat": 40.851,
+    "lon": -96.7592
+  },
+  {
+    "code": "KGRI",
+    "name": "Grand Island Central Nebraska Regional Airport",
+    "lat": 40.9675,
+    "lon": -98.3096
+  },
+  {
+    "code": "KORD",
+    "name": "O'Hare International Airport (Chicago)",
+    "lat": 41.9742,
+    "lon": -87.9073
+  },
+  {
+    "code": "KMDW",
+    "name": "Midway International Airport (Chicago)",
+    "lat": 41.7868,
+    "lon": -87.7522
+  },
+  {
+    "code": "KSPI",
+    "name": "Abraham Lincoln Capital Airport (Springfield)",
+    "lat": 39.8441,
+    "lon": -89.6779
+  },
+  {
+    "code": "KPIA",
+    "name": "General Wayne A. Downing Peoria International",
+    "lat": 40.6642,
+    "lon": -89.6933
+  },
+  {
+    "code": "KBMI",
+    "name": "Central Illinois Regional Airport (Bloomington)",
+    "lat": 40.4771,
+    "lon": -88.9159
+  },
+  {
+    "code": "KIND",
+    "name": "Indianapolis International Airport",
+    "lat": 39.7173,
+    "lon": -86.2944
+  },
+  {
+    "code": "KSBN",
+    "name": "South Bend International Airport",
+    "lat": 41.7087,
+    "lon": -86.3173
+  },
+  {
+    "code": "KFWA",
+    "name": "Fort Wayne International Airport",
+    "lat": 40.9785,
+    "lon": -85.1951
+  },
+  {
+    "code": "KDTW",
+    "name": "Detroit Metropolitan Wayne County Airport",
+    "lat": 42.2124,
+    "lon": -83.3534
+  },
+  {
+    "code": "KGRR",
+    "name": "Gerald R. Ford International Airport (Grand Rapids)",
+    "lat": 42.8808,
+    "lon": -85.5228
+  },
+  {
+    "code": "KLAN",
+    "name": "Capital Region International Airport (Lansing)",
+    "lat": 42.7787,
+    "lon": -84.5874
+  },
+  {
+    "code": "KTVC",
+    "name": "Cherry Capital Airport (Traverse City)",
+    "lat": 44.7413,
+    "lon": -85.5822
+  },
+  {
+    "code": "KCMX",
+    "name": "Houghton County Memorial Airport",
+    "lat": 47.1684,
+    "lon": -88.4891
+  },
+  {
+    "code": "KCLE",
+    "name": "Cleveland Hopkins International Airport",
+    "lat": 41.4117,
+    "lon": -81.8498
+  },
+  {
+    "code": "KCMH",
+    "name": "John Glenn Columbus International Airport",
+    "lat": 39.998,
+    "lon": -82.8919
+  },
+  {
+    "code": "KDAY",
+    "name": "James M. Cox Dayton International Airport",
+    "lat": 39.9024,
+    "lon": -84.2194
+  },
+  {
+    "code": "KTOL",
+    "name": "Eugene F. Kranz Toledo Express Airport",
+    "lat": 41.5868,
+    "lon": -83.8078
+  },
+  {
+    "code": "KMKE",
+    "name": "Milwaukee Mitchell International Airport",
+    "lat": 42.9472,
+    "lon": -87.8966
+  },
+  {
+    "code": "KMSN",
+    "name": "Dane County Regional Airport (Madison)",
+    "lat": 43.1399,
+    "lon": -89.3375
+  },
+  {
+    "code": "KGRB",
+    "name": "Green Bay Austin Straubel International Airport",
+    "lat": 44.4851,
+    "lon": -88.1296
+  },
+  {
+    "code": "KEAU",
+    "name": "Chippewa Valley Regional Airport (Eau Claire)",
+    "lat": 44.8658,
+    "lon": -91.4843
+  },
+  {
+    "code": "KDSM",
+    "name": "Des Moines International Airport",
+    "lat": 41.534,
+    "lon": -93.6631
+  },
+  {
+    "code": "KCID",
+    "name": "Eastern Iowa Airport (Cedar Rapids)",
+    "lat": 41.8847,
+    "lon": -91.7108
+  },
+  {
+    "code": "KDBQ",
+    "name": "Dubuque Regional Airport",
+    "lat": 42.402,
+    "lon": -90.7095
+  },
+  {
+    "code": "KALO",
+    "name": "Waterloo Regional Airport",
+    "lat": 42.5571,
+    "lon": -92.4003
+  },
+  {
+    "code": "KSTL",
+    "name": "St. Louis Lambert International Airport",
+    "lat": 38.7487,
+    "lon": -90.37
+  },
+  {
+    "code": "KSGF",
+    "name": "Springfield-Branson National Airport",
+    "lat": 37.2457,
+    "lon": -93.3886
+  },
+  {
+    "code": "KCOU",
+    "name": "Columbia Regional Airport",
+    "lat": 38.8181,
+    "lon": -92.2196
+  },
+  {
+    "code": "KJLN",
+    "name": "Joplin Regional Airport",
+    "lat": 37.1518,
+    "lon": -94.4983
+  },
+  {
+    "code": "KBNA",
+    "name": "Nashville International Airport",
+    "lat": 36.1245,
+    "lon": -86.6782
+  },
+  {
+    "code": "KMEM",
+    "name": "Memphis International Airport",
+    "lat": 35.0424,
+    "lon": -89.9767
+  },
+  {
+    "code": "KTYS",
+    "name": "McGhee Tyson Airport (Knoxville)",
+    "lat": 35.811,
+    "lon": -83.994
+  },
+  {
+    "code": "KCHA",
+    "name": "Chattanooga Metropolitan Airport",
+    "lat": 35.0353,
+    "lon": -85.2038
+  },
+  {
+    "code": "KLIT",
+    "name": "Bill and Hillary Clinton National Airport (Little Rock)",
+    "lat": 34.7294,
+    "lon": -92.2243
+  },
+  {
+    "code": "KXNA",
+    "name": "Northwest Arkansas National Airport",
+    "lat": 36.2819,
+    "lon": -94.3068
+  },
+  {
+    "code": "KFSM",
+    "name": "Fort Smith Regional Airport",
+    "lat": 35.3366,
+    "lon": -94.3674
+  },
+  {
+    "code": "KJAN",
+    "name": "Jackson-Medgar Wiley Evers International Airport",
+    "lat": 32.3112,
+    "lon": -90.0759
+  },
+  {
+    "code": "KGPT",
+    "name": "Gulfport-Biloxi International Airport",
+    "lat": 30.4073,
+    "lon": -89.0701
+  },
+  {
+    "code": "KMSY",
+    "name": "Louis Armstrong New Orleans International Airport",
+    "lat": 29.9934,
+    "lon": -90.258
+  },
+  {
+    "code": "KBTR",
+    "name": "Baton Rouge Metropolitan Airport",
+    "lat": 30.5332,
+    "lon": -91.1496
+  },
+  {
+    "code": "KLFT",
+    "name": "Lafayette Regional Airport",
+    "lat": 30.2053,
+    "lon": -91.9876
+  },
+  {
+    "code": "KSHV",
+    "name": "Shreveport Regional Airport",
+    "lat": 32.4466,
+    "lon": -93.8256
+  },
+  {
+    "code": "KATL",
+    "name": "Hartsfield-Jackson Atlanta International Airport",
+    "lat": 33.6407,
+    "lon": -84.4277
+  },
+  {
+    "code": "KSAV",
+    "name": "Savannah/Hilton Head International Airport",
+    "lat": 32.1276,
+    "lon": -81.2021
+  },
+  {
+    "code": "KAGS",
+    "name": "Augusta Regional Airport",
+    "lat": 33.37,
+    "lon": -81.9645
+  },
+  {
+    "code": "KABY",
+    "name": "Southwest Georgia Regional Airport",
+    "lat": 31.5355,
+    "lon": -84.1945
+  },
+  {
+    "code": "KBHM",
+    "name": "Birmingham-Shuttlesworth International Airport",
+    "lat": 33.5629,
+    "lon": -86.7535
+  },
+  {
+    "code": "KHSV",
+    "name": "Huntsville International Airport",
+    "lat": 34.6372,
+    "lon": -86.7751
+  },
+  {
+    "code": "KMOB",
+    "name": "Mobile Regional Airport",
+    "lat": 30.6912,
+    "lon": -88.2426
+  },
+  {
+    "code": "KMGM",
+    "name": "Montgomery Regional Airport",
+    "lat": 32.3006,
+    "lon": -86.394
+  },
+  {
+    "code": "KCLT",
+    "name": "Charlotte Douglas International Airport",
+    "lat": 35.214,
+    "lon": -80.9431
+  },
+  {
+    "code": "KRDU",
+    "name": "Raleigh-Durham International Airport",
+    "lat": 35.8776,
+    "lon": -78.7875
+  },
+  {
+    "code": "KGSO",
+    "name": "Piedmont Triad International Airport (Greensboro)",
+    "lat": 36.0978,
+    "lon": -79.9373
+  },
+  {
+    "code": "KILM",
+    "name": "Wilmington International Airport",
+    "lat": 34.2706,
+    "lon": -77.9026
+  },
+  {
+    "code": "KAVL",
+    "name": "Asheville Regional Airport",
+    "lat": 35.4362,
+    "lon": -82.5418
+  },
+  {
+    "code": "KCAE",
+    "name": "Columbia Metropolitan Airport",
+    "lat": 33.9389,
+    "lon": -81.1195
+  },
+  {
+    "code": "KCHS",
+    "name": "Charleston International Airport",
+    "lat": 32.8986,
+    "lon": -80.0405
+  },
+  {
+    "code": "KGSP",
+    "name": "Greenville-Spartanburg International Airport",
+    "lat": 34.8957,
+    "lon": -82.2189
+  },
+  {
+    "code": "KMYR",
+    "name": "Myrtle Beach International Airport",
+    "lat": 33.6797,
+    "lon": -78.9283
+  },
+  {
+    "code": "KRIC",
+    "name": "Richmond International Airport",
+    "lat": 37.5052,
+    "lon": -77.3197
+  },
+  {
+    "code": "KIAD",
+    "name": "Washington Dulles International Airport",
+    "lat": 38.9445,
+    "lon": -77.4558
+  },
+  {
+    "code": "KDCA",
+    "name": "Ronald Reagan Washington National Airport",
+    "lat": 38.8521,
+    "lon": -77.0377
+  },
+  {
+    "code": "KORF",
+    "name": "Norfolk International Airport",
+    "lat": 36.8946,
+    "lon": -76.2012
+  },
+  {
+    "code": "KROA",
+    "name": "Roanoke-Blacksburg Regional Airport",
+    "lat": 37.3255,
+    "lon": -79.9754
+  },
+  {
+    "code": "KCHO",
+    "name": "Charlottesville-Albemarle Airport",
+    "lat": 38.1386,
+    "lon": -78.4529
+  },
+  {
+    "code": "KBWI",
+    "name": "Baltimore/Washington International Airport",
+    "lat": 39.1754,
+    "lon": -76.6683
+  },
+  {
+    "code": "KSBY",
+    "name": "Salisbury-Ocean City Wicomico Regional Airport",
+    "lat": 38.3405,
+    "lon": -75.5103
+  },
+  {
+    "code": "KPHL",
+    "name": "Philadelphia International Airport",
+    "lat": 39.8721,
+    "lon": -75.2411
+  },
+  {
+    "code": "KABE",
+    "name": "Lehigh Valley International Airport (Allentown)",
+    "lat": 40.6521,
+    "lon": -75.4408
+  },
+  {
+    "code": "KMDT",
+    "name": "Harrisburg International Airport",
+    "lat": 40.1935,
+    "lon": -76.7634
+  },
+  {
+    "code": "KIPT",
+    "name": "Williamsport Regional Airport",
+    "lat": 41.2418,
+    "lon": -76.9211
+  },
+  {
+    "code": "KPIT",
+    "name": "Pittsburgh International Airport",
+    "lat": 40.4915,
+    "lon": -80.2329
+  },
+  {
+    "code": "KEWR",
+    "name": "Newark Liberty International Airport",
+    "lat": 40.6925,
+    "lon": -74.1687
+  },
+  {
+    "code": "KJFK",
+    "name": "John F. Kennedy International Airport",
+    "lat": 40.6413,
+    "lon": -73.7781
+  },
+  {
+    "code": "KLGA",
+    "name": "LaGuardia Airport",
+    "lat": 40.7769,
+    "lon": -73.874
+  },
+  {
+    "code": "KISP",
+    "name": "Long Island MacArthur Airport",
+    "lat": 40.7952,
+    "lon": -73.1002
+  },
+  {
+    "code": "KSWF",
+    "name": "New York Stewart International Airport",
+    "lat": 41.5041,
+    "lon": -74.1048
+  },
+  {
+    "code": "KALB",
+    "name": "Albany International Airport",
+    "lat": 42.7483,
+    "lon": -73.8017
+  },
+  {
+    "code": "KSYR",
+    "name": "Syracuse Hancock International Airport",
+    "lat": 43.1112,
+    "lon": -76.1063
+  },
+  {
+    "code": "KBUF",
+    "name": "Buffalo Niagara International Airport",
+    "lat": 42.9405,
+    "lon": -78.7322
+  },
+  {
+    "code": "KROC",
+    "name": "Frederick Douglass Greater Rochester International",
+    "lat": 43.1189,
+    "lon": -77.6724
+  },
+  {
+    "code": "KBGM",
+    "name": "Greater Binghamton Airport",
+    "lat": 42.2087,
+    "lon": -75.9796
+  },
+  {
+    "code": "KBOS",
+    "name": "Boston Logan International Airport",
+    "lat": 42.3656,
+    "lon": -71.0096
+  },
+  {
+    "code": "KPVD",
+    "name": "T.F. Green International Airport (Providence)",
+    "lat": 41.7326,
+    "lon": -71.4204
+  },
+  {
+    "code": "KBDL",
+    "name": "Bradley International Airport (Hartford)",
+    "lat": 41.9389,
+    "lon": -72.6832
+  },
+  {
+    "code": "KPWM",
+    "name": "Portland International Jetport (Maine)",
+    "lat": 43.6462,
+    "lon": -70.3087
+  },
+  {
+    "code": "KBGR",
+    "name": "Bangor International Airport",
+    "lat": 44.8074,
+    "lon": -68.8281
+  },
+  {
+    "code": "KCAR",
+    "name": "Caribou Municipal Airport",
+    "lat": 46.8715,
+    "lon": -68.0179
+  },
+  {
+    "code": "KMHT",
+    "name": "Manchester-Boston Regional Airport",
+    "lat": 42.9326,
+    "lon": -71.4357
+  },
+  {
+    "code": "KLEB",
+    "name": "Lebanon Municipal Airport",
+    "lat": 43.6261,
+    "lon": -72.3042
+  },
+  {
+    "code": "KBTV",
+    "name": "Burlington International Airport",
+    "lat": 44.472,
+    "lon": -73.1533
+  },
+  {
+    "code": "KMPV",
+    "name": "Edward F. Knapp State Airport (Montpelier)",
+    "lat": 44.2035,
+    "lon": -72.5623
+  },
+  {
+    "code": "KFAI",
+    "name": "Fairbanks International Airport",
+    "lat": 64.8151,
+    "lon": -147.8561
+  },
+  {
+    "code": "PANC",
+    "name": "Ted Stevens Anchorage International Airport",
+    "lat": 61.1743,
+    "lon": -149.9962
+  },
+  {
+    "code": "PAJN",
+    "name": "Juneau International Airport",
+    "lat": 58.3547,
+    "lon": -134.5762
+  },
+  {
+    "code": "PHNL",
+    "name": "Daniel K. Inouye International Airport (Honolulu)",
+    "lat": 21.3187,
+    "lon": -157.9225
+  },
+  {
+    "code": "PHOG",
+    "name": "Kahului Airport (Maui)",
+    "lat": 20.8986,
+    "lon": -156.4305
+  },
+  {
+    "code": "PHKO",
+    "name": "Ellison Onizuka Kona International Airport",
+    "lat": 19.7388,
+    "lon": -156.0456
+  },
+  {
+    "code": "KMIA",
+    "name": "Miami International Airport",
+    "lat": 25.7959,
+    "lon": -80.287
+  },
+  {
+    "code": "KMCO",
+    "name": "Orlando International Airport",
+    "lat": 28.4294,
+    "lon": -81.309
+  },
+  {
+    "code": "KTPA",
+    "name": "Tampa International Airport",
+    "lat": 27.9755,
+    "lon": -82.5332
+  },
+  {
+    "code": "KJAX",
+    "name": "Jacksonville International Airport",
+    "lat": 30.4941,
+    "lon": -81.6879
+  },
+  {
+    "code": "KFLL",
+    "name": "Fort Lauderdale-Hollywood International Airport",
+    "lat": 26.0726,
+    "lon": -80.1527
+  },
+  {
+    "code": "KPBI",
+    "name": "Palm Beach International Airport",
+    "lat": 26.6832,
+    "lon": -80.0956
+  },
+  {
+    "code": "KRSW",
+    "name": "Southwest Florida International Airport",
+    "lat": 26.5362,
+    "lon": -81.7552
+  },
+  {
+    "code": "KSRQ",
+    "name": "Sarasota-Bradenton International Airport",
+    "lat": 27.3954,
+    "lon": -82.5544
+  },
+  {
+    "code": "KGNV",
+    "name": "Gainesville Regional Airport",
+    "lat": 29.6901,
+    "lon": -82.2718
+  },
+  {
+    "code": "KTLH",
+    "name": "Tallahassee International Airport",
+    "lat": 30.3965,
+    "lon": -84.3503
+  },
+  {
+    "code": "KPNS",
+    "name": "Pensacola International Airport",
+    "lat": 30.4734,
+    "lon": -87.1866
+  },
+  {
+    "code": "KVPS",
+    "name": "Destin-Fort Walton Beach Airport",
+    "lat": 30.4832,
+    "lon": -86.5254
+  },
+  {
+    "code": "KEYW",
+    "name": "Key West International Airport",
+    "lat": 24.5561,
+    "lon": -81.7596
+  },
+  {
+    "code": "KFMY",
+    "name": "Page Field (Fort Myers)",
+    "lat": 26.5866,
+    "lon": -81.8633
+  },
+  {
+    "code": "KLAL",
+    "name": "Lakeland Linder International Airport",
+    "lat": 27.9889,
+    "lon": -82.0186
+  },
+  {
+    "code": "KCEW",
+    "name": "Bob Sikes Airport (Crestview)",
+    "lat": 30.7788,
+    "lon": -86.5221
+  },
+  {
+    "code": "KWRB",
+    "name": "Robins Air Force Base (Warner Robins)",
+    "lat": 32.6401,
+    "lon": -83.5919
+  },
+  {
+    "code": "KVAD",
+    "name": "Moody Air Force Base (Valdosta)",
+    "lat": 30.9678,
+    "lon": -83.193
+  },
+  {
+    "code": "KPDK",
+    "name": "DeKalb-Peachtree Airport (Atlanta)",
+    "lat": 33.8756,
+    "lon": -84.302
+  },
+  {
+    "code": "KCSG",
+    "name": "Columbus Metropolitan Airport (Georgia)",
+    "lat": 32.5163,
+    "lon": -84.9389
+  },
+  {
+    "code": "KSEM",
+    "name": "Craig Field (Selma, AL)",
+    "lat": 32.3439,
+    "lon": -86.9878
+  },
+  {
+    "code": "KDHN",
+    "name": "Dothan Regional Airport",
+    "lat": 31.3213,
+    "lon": -85.4496
+  },
+  {
+    "code": "KNSE",
+    "name": "NAS Whiting Field North (Milton, FL)",
+    "lat": 30.7242,
+    "lon": -87.0219
+  },
+  {
+    "code": "KDAB",
+    "name": "Daytona Beach International Airport",
+    "lat": 29.1799,
+    "lon": -81.0581
+  },
+  {
+    "code": "KMLB",
+    "name": "Melbourne Orlando International Airport",
+    "lat": 28.1028,
+    "lon": -80.6453
+  },
+  {
+    "code": "KFOE",
+    "name": "Topeka Forbes Field",
+    "lat": 38.9509,
+    "lon": -95.6636
+  },
+  {
+    "code": "KSLN",
+    "name": "Salina Regional Airport",
+    "lat": 38.791,
+    "lon": -97.6522
+  },
+  {
+    "code": "KEAR",
+    "name": "Kearney Regional Airport",
+    "lat": 40.727,
+    "lon": -99.0068
+  },
+  {
+    "code": "KLBF",
+    "name": "North Platte Regional Airport",
+    "lat": 41.1262,
+    "lon": -100.6837
+  },
+  {
+    "code": "KCYS",
+    "name": "Cheyenne Regional Airport",
+    "lat": 41.1557,
+    "lon": -104.8118
+  },
+  {
+    "code": "KCPR",
+    "name": "Casper-Natrona County International Airport",
+    "lat": 42.908,
+    "lon": -106.4644
+  },
+  {
+    "code": "KFET",
+    "name": "Fremont Municipal Airport",
+    "lat": 41.4491,
+    "lon": -96.5202
+  },
+  {
+    "code": "KOFK",
+    "name": "Karl Stefan Memorial Airport (Norfolk, NE)",
+    "lat": 41.9855,
+    "lon": -97.4351
+  },
+  {
+    "code": "KSUX",
+    "name": "Sioux Gateway Airport",
+    "lat": 42.4026,
+    "lon": -96.3844
+  },
+  {
+    "code": "KAEX",
+    "name": "Alexandria International Airport (Louisiana)",
+    "lat": 31.3274,
+    "lon": -92.5486
+  },
+  {
+    "code": "KMLC",
+    "name": "McAlester Regional Airport",
+    "lat": 34.8824,
+    "lon": -95.7835
+  },
+  {
+    "code": "KGAG",
+    "name": "Gage Airport (Oklahoma)",
+    "lat": 36.2955,
+    "lon": -99.7764
+  },
+  {
+    "code": "KSWO",
+    "name": "Stillwater Regional Airport",
+    "lat": 36.1612,
+    "lon": -97.0857
+  },
+  {
+    "code": "KRHI",
+    "name": "Rhinelander-Oneida County Airport",
+    "lat": 45.6312,
+    "lon": -89.4675
+  },
+  {
+    "code": "KATW",
+    "name": "Appleton International Airport",
+    "lat": 44.2581,
+    "lon": -88.5191
+  },
+  {
+    "code": "KLSE",
+    "name": "La Crosse Regional Airport",
+    "lat": 43.8793,
+    "lon": -91.2566
+  },
+  {
+    "code": "KMIC",
+    "name": "Crystal Airport (Minneapolis)",
+    "lat": 45.062,
+    "lon": -93.3539
+  },
+  {
+    "code": "KFCM",
+    "name": "Flying Cloud Airport (Eden Prairie)",
+    "lat": 44.8272,
+    "lon": -93.4571
+  },
+  {
+    "code": "KMKT",
+    "name": "Mankato Regional Airport",
+    "lat": 44.2216,
+    "lon": -93.9187
+  },
+  {
+    "code": "KAXN",
+    "name": "Chandler Field (Alexandria, MN)",
+    "lat": 45.8663,
+    "lon": -95.3947
+  },
+  {
+    "code": "KINL",
+    "name": "Falls International Airport",
+    "lat": 48.5662,
+    "lon": -93.4031
+  },
+  {
+    "code": "KBJI",
+    "name": "Bemidji Regional Airport",
+    "lat": 47.5094,
+    "lon": -94.9337
+  },
+  {
+    "code": "KAIO",
+    "name": "Atlantic Municipal Airport (Iowa)",
+    "lat": 41.4073,
+    "lon": -95.0469
+  },
+  {
+    "code": "KRFD",
+    "name": "Chicago Rockford International Airport",
+    "lat": 42.1954,
+    "lon": -89.0972
+  },
+  {
+    "code": "KMLI",
+    "name": "Quad City International Airport",
+    "lat": 41.4485,
+    "lon": -90.5075
+  },
+  {
+    "code": "KEVV",
+    "name": "Evansville Regional Airport",
+    "lat": 38.037,
+    "lon": -87.5324
+  },
+  {
+    "code": "KHUF",
+    "name": "Terre Haute International Airport",
+    "lat": 39.4515,
+    "lon": -87.3076
+  },
+  {
+    "code": "KLAF",
+    "name": "Purdue University Airport (Lafayette)",
+    "lat": 40.4123,
+    "lon": -86.9369
+  },
+  {
+    "code": "KAZO",
+    "name": "Kalamazoo/Battle Creek International Airport",
+    "lat": 42.2349,
+    "lon": -85.5521
+  },
+  {
+    "code": "KMBS",
+    "name": "MBS International Airport (Saginaw)",
+    "lat": 43.5329,
+    "lon": -84.0796
+  },
+  {
+    "code": "KAPN",
+    "name": "Alpena County Regional Airport",
+    "lat": 45.0781,
+    "lon": -83.5603
+  },
+  {
+    "code": "KESC",
+    "name": "Delta County Airport (Escanaba)",
+    "lat": 45.7227,
+    "lon": -87.0937
+  },
+  {
+    "code": "KYNG",
+    "name": "Youngstown-Warren Regional Airport",
+    "lat": 41.2607,
+    "lon": -80.679
+  },
+  {
+    "code": "KLEX",
+    "name": "Blue Grass Airport (Lexington)",
+    "lat": 38.0365,
+    "lon": -84.6059
+  },
+  {
+    "code": "KSDF",
+    "name": "Louisville Muhammad Ali International Airport",
+    "lat": 38.1744,
+    "lon": -85.736
+  },
+  {
+    "code": "KPAH",
+    "name": "Barkley Regional Airport (Paducah)",
+    "lat": 37.0603,
+    "lon": -88.7738
+  },
+  {
+    "code": "KCVG",
+    "name": "Cincinnati/Northern Kentucky International Airport",
+    "lat": 39.0488,
+    "lon": -84.6678
+  },
+  {
+    "code": "KHTS",
+    "name": "Tri-State Airport (Huntington, WV)",
+    "lat": 38.3667,
+    "lon": -82.558
+  },
+  {
+    "code": "KCRW",
+    "name": "Yeager Airport (Charleston, WV)",
+    "lat": 38.3731,
+    "lon": -81.5932
+  },
+  {
+    "code": "KCKB",
+    "name": "North Central West Virginia Airport (Clarksburg)",
+    "lat": 39.2966,
+    "lon": -80.2281
+  },
+  {
+    "code": "KERI",
+    "name": "Erie International Airport",
+    "lat": 42.0831,
+    "lon": -80.1762
+  },
+  {
+    "code": "KUNV",
+    "name": "University Park Airport (State College)",
+    "lat": 40.8493,
+    "lon": -77.8487
+  },
+  {
+    "code": "KAVP",
+    "name": "Wilkes-Barre/Scranton International Airport",
+    "lat": 41.3385,
+    "lon": -75.7234
+  },
+  {
+    "code": "KHVN",
+    "name": "Tweed New Haven Airport",
+    "lat": 41.2637,
+    "lon": -72.8868
+  },
+  {
+    "code": "KGON",
+    "name": "Groton-New London Airport",
+    "lat": 41.3301,
+    "lon": -72.0451
+  },
+  {
+    "code": "KACK",
+    "name": "Nantucket Memorial Airport",
+    "lat": 41.2531,
+    "lon": -70.0604
+  },
+  {
+    "code": "KMVY",
+    "name": "Martha's Vineyard Airport",
+    "lat": 41.3931,
+    "lon": -70.6143
+  },
+  {
+    "code": "KORH",
+    "name": "Worcester Regional Airport",
+    "lat": 42.2673,
+    "lon": -71.8757
+  },
+  {
+    "code": "KHYA",
+    "name": "Barnstable Municipal Airport (Hyannis)",
+    "lat": 41.6693,
+    "lon": -70.2804
+  },
+  {
+    "code": "KSFM",
+    "name": "Sanford Seacoast Regional Airport (Maine)",
+    "lat": 43.3937,
+    "lon": -70.7089
+  },
+  {
+    "code": "KAUG",
+    "name": "Augusta State Airport (Maine)",
+    "lat": 44.3206,
+    "lon": -69.7973
+  },
+  {
+    "code": "KRKD",
+    "name": "Knox County Regional Airport (Rockland, ME)",
+    "lat": 44.0601,
+    "lon": -69.0993
+  },
+  {
+    "code": "KPQI",
+    "name": "Presque Isle International Airport",
+    "lat": 46.689,
+    "lon": -68.0448
+  },
+  {
+    "code": "KCON",
+    "name": "Concord Municipal Airport (NH)",
+    "lat": 43.2027,
+    "lon": -71.5022
+  },
+  {
+    "code": "KVSF",
+    "name": "Hartness State Airport (Springfield, VT)",
+    "lat": 43.3436,
+    "lon": -72.5173
+  },
+  {
+    "code": "KBML",
+    "name": "Berlin Regional Airport (NH)",
+    "lat": 44.5754,
+    "lon": -71.1759
+  },
+  {
+    "code": "KLCI",
+    "name": "Laconia Municipal Airport (NH)",
+    "lat": 43.5727,
+    "lon": -71.4189
+  },
+  {
+    "code": "KSFZ",
+    "name": "North Central State Airport (Pawtucket, RI)",
+    "lat": 41.9208,
+    "lon": -71.4914
+  },
+  {
+    "code": "KWST",
+    "name": "Westerly State Airport (RI)",
+    "lat": 41.3496,
+    "lon": -71.8034
+  },
+  {
+    "code": "KEWB",
+    "name": "New Bedford Regional Airport",
+    "lat": 41.6761,
+    "lon": -70.9569
+  },
+  {
+    "code": "KBED",
+    "name": "Laurence G. Hanscom Field (Bedford, MA)",
+    "lat": 42.47,
+    "lon": -71.289
+  },
+  {
+    "code": "KFMH",
+    "name": "Cape Cod Coast Guard Air Station",
+    "lat": 41.6585,
+    "lon": -70.5215
+  },
+  {
+    "code": "KASH",
+    "name": "Boire Field (Nashua, NH)",
+    "lat": 42.7817,
+    "lon": -71.5148
+  },
+  {
+    "code": "KDDH",
+    "name": "William H. Morse State Airport (Bennington, VT)",
+    "lat": 42.8913,
+    "lon": -73.2464
+  },
+  {
+    "code": "KEFK",
+    "name": "Newport State Airport (VT)",
+    "lat": 44.8888,
+    "lon": -72.2293
+  },
+  {
+    "code": "KGFL",
+    "name": "Floyd Bennett Memorial Airport (Glens Falls)",
+    "lat": 43.3412,
+    "lon": -73.6103
+  },
+  {
+    "code": "KELM",
+    "name": "Elmira/Corning Regional Airport",
+    "lat": 42.1599,
+    "lon": -76.8916
+  },
+  {
+    "code": "KITH",
+    "name": "Ithaca Tompkins International Airport",
+    "lat": 42.491,
+    "lon": -76.4584
+  },
+  {
+    "code": "KPBG",
+    "name": "Plattsburgh International Airport",
+    "lat": 44.6509,
+    "lon": -73.4681
+  },
+  {
+    "code": "KART",
+    "name": "Watertown International Airport",
+    "lat": 43.9919,
+    "lon": -76.0217
+  },
+  {
+    "code": "KFOK",
+    "name": "Francis S. Gabreski Airport (Westhampton Beach)",
+    "lat": 40.8437,
+    "lon": -72.6318
+  },
+  {
+    "code": "KHPN",
+    "name": "Westchester County Airport (White Plains)",
+    "lat": 41.067,
+    "lon": -73.7076
+  },
+  {
+    "code": "KCDW",
+    "name": "Essex County Airport (Caldwell, NJ)",
+    "lat": 40.8752,
+    "lon": -74.2814
+  },
+  {
+    "code": "KTEB",
+    "name": "Teterboro Airport",
+    "lat": 40.8501,
+    "lon": -74.0608
+  },
+  {
+    "code": "KACY",
+    "name": "Atlantic City International Airport",
+    "lat": 39.4576,
+    "lon": -74.5772
+  },
+  {
+    "code": "KILG",
+    "name": "Wilmington Airport (Delaware)",
+    "lat": 39.6787,
+    "lon": -75.6065
+  },
+  {
+    "code": "KDOV",
+    "name": "Dover Air Force Base",
+    "lat": 39.1297,
+    "lon": -75.466
+  },
+  {
+    "code": "KESN",
+    "name": "Easton Airport (Maryland)",
+    "lat": 38.8042,
+    "lon": -76.069
+  },
+  {
+    "code": "KMTN",
+    "name": "Martin State Airport (Baltimore)",
+    "lat": 39.3257,
+    "lon": -76.4138
+  },
+  {
+    "code": "KLYH",
+    "name": "Lynchburg Regional Airport",
+    "lat": 37.3267,
+    "lon": -79.2004
+  },
+  {
+    "code": "KPHF",
+    "name": "Newport News/Williamsburg International Airport",
+    "lat": 37.1319,
+    "lon": -76.493
+  },
+  {
+    "code": "KSHD",
+    "name": "Shenandoah Valley Regional Airport",
+    "lat": 38.2638,
+    "lon": -78.8964
+  },
+  {
+    "code": "KFYV",
+    "name": "Drake Field (Fayetteville, AR)",
+    "lat": 36.0051,
+    "lon": -94.17
+  },
+  {
+    "code": "KJBR",
+    "name": "Jonesboro Municipal Airport",
+    "lat": 35.8317,
+    "lon": -90.6462
+  },
+  {
+    "code": "KTXK",
+    "name": "Texarkana Regional Airport",
+    "lat": 33.4537,
+    "lon": -93.991
+  },
+  {
+    "code": "KGRK",
+    "name": "Robert Gray Army Airfield (Killeen/Fort Cavazos)",
+    "lat": 31.0672,
+    "lon": -97.8289
+  },
+  {
+    "code": "KACT",
+    "name": "Waco Regional Airport",
+    "lat": 31.6113,
+    "lon": -97.2305
+  },
+  {
+    "code": "KSHR",
+    "name": "Sheridan County Airport",
+    "lat": 44.7692,
+    "lon": -106.9803
+  },
+  {
+    "code": "KRKS",
+    "name": "Southwest Wyoming Regional Airport (Rock Springs)",
+    "lat": 41.5942,
+    "lon": -109.0652
+  },
+  {
+    "code": "KJAC",
+    "name": "Jackson Hole Airport",
+    "lat": 43.6073,
+    "lon": -110.7378
+  },
+  {
+    "code": "KCOD",
+    "name": "Yellowstone Regional Airport (Cody)",
+    "lat": 44.5202,
+    "lon": -109.0238
+  },
+  {
+    "code": "KRIW",
+    "name": "Riverton Regional Airport",
+    "lat": 43.0642,
+    "lon": -108.4598
+  },
+  {
+    "code": "KSDY",
+    "name": "Sidney-Richland Municipal Airport",
+    "lat": 47.7069,
+    "lon": -104.1926
+  },
+  {
+    "code": "KHVR",
+    "name": "Havre City-County Airport",
+    "lat": 48.543,
+    "lon": -109.7622
+  },
+  {
+    "code": "KMLS",
+    "name": "Frank Wiley Field (Miles City)",
+    "lat": 46.428,
+    "lon": -105.8861
+  },
+  {
+    "code": "KGPI",
+    "name": "Glacier Park International Airport (Kalispell)",
+    "lat": 48.3105,
+    "lon": -114.256
+  },
+  {
+    "code": "KLWT",
+    "name": "Lewistown Municipal Airport",
+    "lat": 47.0493,
+    "lon": -109.4673
+  },
+  {
+    "code": "KEKO",
+    "name": "Elko Regional Airport",
+    "lat": 40.8249,
+    "lon": -115.7917
+  },
+  {
+    "code": "KWMC",
+    "name": "Winnemucca Municipal Airport",
+    "lat": 40.8966,
+    "lon": -117.8059
+  },
+  {
+    "code": "KELY",
+    "name": "Ely Airport (Yelland Field)",
+    "lat": 39.2997,
+    "lon": -114.8419
+  },
+  {
+    "code": "KVGT",
+    "name": "North Las Vegas Airport",
+    "lat": 36.2107,
+    "lon": -115.1944
+  },
+  {
+    "code": "KBCE",
+    "name": "Bryce Canyon Airport",
+    "lat": 37.7064,
+    "lon": -112.1455
+  },
+  {
+    "code": "KCNY",
+    "name": "Canyonlands Field (Moab)",
+    "lat": 38.755,
+    "lon": -109.7549
+  },
+  {
+    "code": "KVEL",
+    "name": "Vernal Regional Airport",
+    "lat": 40.4409,
+    "lon": -109.5099
+  },
+  {
+    "code": "KGUC",
+    "name": "Gunnison-Crested Butte Regional Airport",
+    "lat": 38.5339,
+    "lon": -106.9332
+  },
+  {
+    "code": "KALS",
+    "name": "San Luis Valley Regional Airport (Alamosa)",
+    "lat": 37.435,
+    "lon": -105.8668
+  },
+  {
+    "code": "KCEZ",
+    "name": "Cortez Municipal Airport",
+    "lat": 37.303,
+    "lon": -108.6281
+  },
+  {
+    "code": "KTEX",
+    "name": "Telluride Regional Airport",
+    "lat": 37.9538,
+    "lon": -107.9085
+  },
+  {
+    "code": "KEGE",
+    "name": "Eagle County Regional Airport",
+    "lat": 39.6426,
+    "lon": -106.9159
+  },
+  {
+    "code": "KHDN",
+    "name": "Yampa Valley Airport (Hayden)",
+    "lat": 40.4812,
+    "lon": -107.2177
+  },
+  {
+    "code": "KAPA",
+    "name": "Centennial Airport (Denver area)",
+    "lat": 39.5701,
+    "lon": -104.8493
+  },
+  {
+    "code": "KBJC",
+    "name": "Rocky Mountain Metropolitan Airport (Broomfield)",
+    "lat": 39.9088,
+    "lon": -105.1172
+  },
+  {
+    "code": "KFNL",
+    "name": "Northern Colorado Regional Airport (Fort Collins)",
+    "lat": 40.4518,
+    "lon": -105.0113
+  },
+  {
+    "code": "KLAR",
+    "name": "Laramie Regional Airport",
+    "lat": 41.3121,
+    "lon": -105.675
+  },
+  {
+    "code": "KWYS",
+    "name": "Yellowstone Airport (West Yellowstone)",
+    "lat": 44.6884,
+    "lon": -111.1176
+  },
+  {
+    "code": "KDIK",
+    "name": "Dickinson Theodore Roosevelt Regional Airport",
+    "lat": 46.7975,
+    "lon": -102.802
+  },
+  {
+    "code": "KWRL",
+    "name": "Worland Municipal Airport",
+    "lat": 43.9657,
+    "lon": -107.9509
+  },
+  {
+    "code": "KPIR",
+    "name": "Pierre Regional Airport",
+    "lat": 44.3827,
+    "lon": -100.286
+  },
+  {
+    "code": "KMBG",
+    "name": "Mobridge Municipal Airport",
+    "lat": 45.5465,
+    "lon": -100.408
+  },
+  {
+    "code": "KATY",
+    "name": "Watertown Regional Airport (SD)",
+    "lat": 44.914,
+    "lon": -97.1547
+  },
+  {
+    "code": "KYKN",
+    "name": "Chan Gurney Municipal Airport (Yankton)",
+    "lat": 42.9167,
+    "lon": -97.3859
+  },
+  {
+    "code": "KBYI",
+    "name": "Burley Municipal Airport",
+    "lat": 42.5426,
+    "lon": -113.7716
+  },
+  {
+    "code": "KSMN",
+    "name": "Lemhi County Airport (Salmon)",
+    "lat": 45.1237,
+    "lon": -113.8816
+  },
+  {
+    "code": "KMYL",
+    "name": "McCall Municipal Airport",
+    "lat": 44.8888,
+    "lon": -116.1013
+  },
+  {
+    "code": "KSZT",
+    "name": "Sandpoint Airport",
+    "lat": 48.2996,
+    "lon": -116.56
+  },
+  {
+    "code": "KMUO",
+    "name": "Mountain Home Air Force Base",
+    "lat": 43.0436,
+    "lon": -115.8724
+  },
+  {
+    "code": "KRXE",
+    "name": "Rexburg-Madison County Airport",
+    "lat": 43.8339,
+    "lon": -111.8055
+  },
+  {
+    "code": "KMCK",
+    "name": "McCook Ben Nelson Regional Airport",
+    "lat": 40.2064,
+    "lon": -100.5921
+  },
+  {
+    "code": "KSNY",
+    "name": "Sidney Municipal Airport (NE)",
+    "lat": 41.1013,
+    "lon": -102.9853
+  },
+  {
+    "code": "KOLU",
+    "name": "Columbus Municipal Airport (NE)",
+    "lat": 41.448,
+    "lon": -97.3426
+  },
+  {
+    "code": "KHSI",
+    "name": "Hastings Municipal Airport",
+    "lat": 40.6053,
+    "lon": -98.4279
+  },
+  {
+    "code": "KMCW",
+    "name": "Mason City Municipal Airport",
+    "lat": 43.1578,
+    "lon": -93.3313
+  },
+  {
+    "code": "KFOD",
+    "name": "Fort Dodge Regional Airport",
+    "lat": 42.5515,
+    "lon": -94.1926
+  },
+  {
+    "code": "KOTM",
+    "name": "Ottumwa Regional Airport",
+    "lat": 41.1066,
+    "lon": -92.4479
+  },
+  {
+    "code": "KBRL",
+    "name": "Southeast Iowa Regional Airport (Burlington)",
+    "lat": 40.7832,
+    "lon": -91.1255
+  },
+  {
+    "code": "KMCF",
+    "name": "MacDill Air Force Base (Tampa)",
+    "lat": 27.8493,
+    "lon": -82.5212
+  },
+  {
+    "code": "KNIP",
+    "name": "NAS Jacksonville",
+    "lat": 30.2358,
+    "lon": -81.6806
+  },
+  {
+    "code": "KNPA",
+    "name": "NAS Pensacola",
+    "lat": 30.3527,
+    "lon": -87.3186
+  },
+  {
+    "code": "KNGP",
+    "name": "NAS Corpus Christi",
+    "lat": 27.6927,
+    "lon": -97.2911
+  },
+  {
+    "code": "KNKX",
+    "name": "MCAS Miramar (San Diego)",
+    "lat": 32.8684,
+    "lon": -117.1424
+  },
+  {
+    "code": "KNZY",
+    "name": "NAS North Island (San Diego)",
+    "lat": 32.6992,
+    "lon": -117.2153
+  },
+  {
+    "code": "KEDW",
+    "name": "Edwards Air Force Base",
+    "lat": 34.9054,
+    "lon": -117.8837
+  },
+  {
+    "code": "KNLC",
+    "name": "NAS Lemoore",
+    "lat": 36.333,
+    "lon": -119.9521
+  },
+  {
+    "code": "KOFF",
+    "name": "Offutt Air Force Base (Omaha)",
+    "lat": 41.1183,
+    "lon": -95.9125
+  },
+  {
+    "code": "KCBM",
+    "name": "Columbus Air Force Base (Mississippi)",
+    "lat": 33.6438,
+    "lon": -88.4438
+  },
+  {
+    "code": "KBLV",
+    "name": "Scott Air Force Base",
+    "lat": 38.5452,
+    "lon": -89.8352
+  },
+  {
+    "code": "KNTU",
+    "name": "NAS Oceana (Virginia Beach)",
+    "lat": 36.8207,
+    "lon": -76.0336
+  },
+  {
+    "code": "KLFI",
+    "name": "Langley Air Force Base (Hampton)",
+    "lat": 37.0829,
+    "lon": -76.3605
+  },
+  {
+    "code": "KSUU",
+    "name": "Travis Air Force Base (Fairfield)",
+    "lat": 38.2627,
+    "lon": -121.9274
+  },
+  {
+    "code": "KHIF",
+    "name": "Hill Air Force Base (Ogden)",
+    "lat": 41.124,
+    "lon": -111.9731
+  },
+  {
+    "code": "KLUF",
+    "name": "Luke Air Force Base (Phoenix)",
+    "lat": 33.535,
+    "lon": -112.383
+  },
+  {
+    "code": "KDMA",
+    "name": "Davis-Monthan Air Force Base (Tucson)",
+    "lat": 32.1665,
+    "lon": -110.883
+  },
+  {
+    "code": "KCRP",
+    "name": "Corpus Christi International Airport",
+    "lat": 27.7704,
+    "lon": -97.5012
+  },
+  {
+    "code": "KBRO",
+    "name": "Brownsville/South Padre Island International Airport",
+    "lat": 25.9068,
+    "lon": -97.4259
+  },
+  {
+    "code": "KMFE",
+    "name": "McAllen Miller International Airport",
+    "lat": 26.1758,
+    "lon": -98.2386
+  },
+  {
+    "code": "KLRD",
+    "name": "Laredo International Airport",
+    "lat": 27.5438,
+    "lon": -99.4617
+  },
+  {
+    "code": "KSJT",
+    "name": "San Angelo Regional Airport",
+    "lat": 31.3577,
+    "lon": -100.4963
+  },
+  {
+    "code": "KTYR",
+    "name": "Tyler Pounds Regional Airport",
+    "lat": 32.3541,
+    "lon": -95.4024
+  },
+  {
+    "code": "KGGG",
+    "name": "East Texas Regional Airport (Longview)",
+    "lat": 32.384,
+    "lon": -94.7115
+  }
+]
