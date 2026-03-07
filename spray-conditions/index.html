@@ -32,53 +32,14 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <!-- Header -->
+    <!-- Header (brand-matched) -->
     <header class="page-header">
-      <a href="/" class="back-link">&larr; GroDrones</a>
+      <a href="/" class="header-logo">
+        <img src="/logo.png" alt="GroDrones" class="logo-img" />
+      </a>
       <h1 class="page-title">Spray Conditions</h1>
+      <a href="/" class="back-link">&larr; Back to site</a>
     </header>
-
-    <!-- Controls -->
-    <div class="controls-bar">
-      <div class="search-wrapper">
-        <svg
-          class="search-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-        <input
-          type="text"
-          class="search-input"
-          id="searchInput"
-          placeholder="Search address or city…"
-          autocomplete="off"
-        />
-        <div class="search-results" id="searchResults"></div>
-      </div>
-      <button class="gps-btn" id="gpsBtn" type="button">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="12" cy="12" r="3" />
-          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
-        </svg>
-        Use My Location
-      </button>
-    </div>
 
     <!-- Main Content -->
     <div class="main-content">
@@ -87,6 +48,48 @@
         <div id="map"></div>
         <button class="layer-toggle" id="layerToggle" type="button">
           Satellite
+        </button>
+      </div>
+
+      <!-- Controls (below map) -->
+      <div class="controls-bar">
+        <div class="search-wrapper">
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="text"
+            class="search-input"
+            id="searchInput"
+            placeholder="Search address or city…"
+            autocomplete="off"
+          />
+          <div class="search-results" id="searchResults"></div>
+        </div>
+        <button class="gps-btn" id="gpsBtn" type="button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+          </svg>
+          Use My Location
         </button>
       </div>
 
@@ -135,10 +138,11 @@
             <div class="location-info" id="locationInfo"></div>
           </div>
 
-          <!-- Station + Confidence -->
-          <div class="result-section" id="stationSection" style="display: none">
-            <div class="section-label">Observation Station</div>
-            <div class="station-info" id="stationInfo"></div>
+          <!-- Station / Data Source + Confidence -->
+          <div class="result-section" id="sourceSection">
+            <div class="section-label" id="sourceSectionLabel">Data Source</div>
+            <div class="source-label-info" id="sourceLabelInfo"></div>
+            <div class="confidence-display" id="confidenceDisplay"></div>
           </div>
 
           <!-- Primary Conditions -->
@@ -165,11 +169,14 @@
             <div class="source-info" id="sourceInfo"></div>
           </div>
 
+          <!-- Disclaimer -->
+          <div class="spray-disclaimer">
+            Advisory only — not a substitute for on-site assessment. Always follow product label directions and local regulations before spraying.
+          </div>
+
           <!-- Footer -->
           <div class="spray-footer">
-            Advisory only. Always follow product label and local regulations.
-            <br />
-            Provided by <a href="/">GroDrones</a>.
+            Provided by <a href="/">GroDrones</a>
           </div>
         </div>
       </div>

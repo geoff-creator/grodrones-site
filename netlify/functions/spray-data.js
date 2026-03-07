@@ -31,12 +31,11 @@ const THRESHOLDS = {
     red: 40      // below 40%
   },
   delta_t: {
-    red_low: 3.0,
-    yellow_low: 3.6,
+    yellow_low: 3.6,    // below 3.6 = yellow (caution, NOT red)
     green_low: 3.6,
     green_high: 14.4,
     yellow_high: 18.0,
-    red_high: 18.0
+    red_high: 18.0      // above 18 = red
   },
   precip_chance: {
     green: 20,   // under 20%
@@ -343,6 +342,26 @@ async function buildSprayData(lat, lon) {
     // Non-critical, keep coordinate string
   }
 
+  // ── Delta-T reason text ─────────────────────────────────────
+  let deltaTReason = null;
+  if (deltaT != null) {
+    if (deltaT < THRESHOLDS.delta_t.yellow_low) {
+      deltaTReason = 'Caution: low Delta-T may indicate moist, stable air';
+    } else if (deltaT > THRESHOLDS.delta_t.red_high) {
+      deltaTReason = 'Do not spray: Delta-T too high, evaporation risk';
+    } else if (deltaT > THRESHOLDS.delta_t.green_high) {
+      deltaTReason = 'Approaching high range — monitor conditions';
+    } else {
+      deltaTReason = 'Favorable Delta-T range';
+    }
+  }
+
+  // ── Determine primary source for labeling ──────────────────
+  const primarySource = sourcesUsed.includes('METAR') ? 'METAR'
+    : sourcesUsed.includes('Open-Meteo') ? 'Open-Meteo'
+    : sourcesUsed.includes('NOAA') ? 'NOAA'
+    : null;
+
   // ── Freshest time ────────────────────────────────────────────
   const lastUpdated = freshestTime
     ? freshestTime.toISOString()
@@ -357,6 +376,8 @@ async function buildSprayData(lat, lon) {
     overall,
     trust,
     station: stationInfo,
+    primary_source: primarySource,
+    delta_t_reason: deltaTReason,
     metrics,
     advisories: {
       inversion: 'Temperature inversion is difficult to confirm remotely. Always verify on site.'
@@ -584,9 +605,9 @@ function getRHStatus(rh) {
 
 function getDeltaTStatus(dt) {
   if (dt == null) return null;
-  if (dt < THRESHOLDS.delta_t.red_low || dt > THRESHOLDS.delta_t.red_high) return 'red';
-  if (dt >= THRESHOLDS.delta_t.green_low && dt <= THRESHOLDS.delta_t.green_high) return 'green';
-  return 'yellow';
+  if (dt > THRESHOLDS.delta_t.red_high) return 'red';       // >18°F = red
+  if (dt >= THRESHOLDS.delta_t.green_low && dt <= THRESHOLDS.delta_t.green_high) return 'green'; // 3.6–14.4 = green
+  return 'yellow'; // <3.6 or 14.4–18 = yellow (low Delta-T is caution only)
 }
 
 function getPrecipStatus(pct) {
@@ -619,6 +640,9 @@ function determineOverall(metrics) {
     if (!m || m.status == null) continue;
 
     if (m.status === 'red') {
+      // Low Delta-T should never produce red (only high Delta-T can be red)
+      // This is enforced by getDeltaTStatus, but double-check here:
+      // delta_t red is only for values > 18°F (high evaporation risk)
       hasRed = true;
       if (!criticalReason) {
         criticalReason = buildReason(key, label, m.value);
@@ -657,9 +681,10 @@ function buildReason(key, label, value) {
       if (value < THRESHOLDS.relative_humidity.red) return 'Relative humidity too low — drift risk';
       return `Relative humidity ${round(value, 0)}% — marginal`;
     case 'delta_t':
-      if (value < THRESHOLDS.delta_t.red_low) return 'Delta-T too low — inversion risk';
-      if (value > THRESHOLDS.delta_t.red_high) return 'Delta-T too high — evaporation risk';
-      return `Delta-T ${round(value, 1)}°F — marginal`;
+      if (value > THRESHOLDS.delta_t.red_high) return 'Do not spray: Delta-T too high, evaporation risk';
+      if (value < THRESHOLDS.delta_t.yellow_low) return 'Caution: low Delta-T may indicate moist, stable air';
+      if (value > THRESHOLDS.delta_t.green_high) return `Delta-T ${round(value, 1)}°F — approaching high range`;
+      return 'Favorable Delta-T range';
     case 'precip_chance':
       if (value > THRESHOLDS.precip_chance.red) return `Precipitation chance ${round(value, 0)}%`;
       return `Precipitation chance ${round(value, 0)}% — elevated`;

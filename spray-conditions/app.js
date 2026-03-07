@@ -24,8 +24,10 @@
   const statusLabel = document.getElementById('statusLabel');
   const statusReason = document.getElementById('statusReason');
   const locationInfo = document.getElementById('locationInfo');
-  const stationSection = document.getElementById('stationSection');
-  const stationInfo = document.getElementById('stationInfo');
+  const sourceSection = document.getElementById('sourceSection');
+  const sourceSectionLabel = document.getElementById('sourceSectionLabel');
+  const sourceLabelInfo = document.getElementById('sourceLabelInfo');
+  const confidenceDisplay = document.getElementById('confidenceDisplay');
   const primaryMetrics = document.getElementById('primaryMetrics');
   const supportingMetrics = document.getElementById('supportingMetrics');
   const advisories = document.getElementById('advisories');
@@ -104,7 +106,7 @@
 
   // ── Address Search (Nominatim, debounced) ────────────────────
   searchInput.addEventListener('input', function () {
-    const query = searchInput.value.trim();
+    var query = searchInput.value.trim();
 
     if (searchTimeout) clearTimeout(searchTimeout);
 
@@ -133,7 +135,7 @@
 
   async function searchAddress(query) {
     try {
-      const resp = await fetch(
+      var resp = await fetch(
         'https://nominatim.openstreetmap.org/search?' +
           new URLSearchParams({
             q: query,
@@ -150,7 +152,7 @@
       );
 
       if (!resp.ok) return;
-      const data = await resp.json();
+      var data = await resp.json();
 
       if (data.length === 0) {
         searchResults.innerHTML =
@@ -214,18 +216,18 @@
 
   async function fetchSprayData(lat, lon, signal) {
     try {
-      const url =
+      var url =
         '/.netlify/functions/spray-data?lat=' +
         lat.toFixed(6) +
         '&lon=' +
         lon.toFixed(6);
 
-      const resp = await fetch(url, { signal: signal });
+      var resp = await fetch(url, { signal: signal });
       if (!resp.ok) {
         throw new Error('Server returned ' + resp.status);
       }
 
-      const data = await resp.json();
+      var data = await resp.json();
       if (data.error) {
         throw new Error(data.error);
       }
@@ -257,41 +259,33 @@
     // Location
     locationInfo.textContent = data.location?.name || data.location?.lat + ', ' + data.location?.lon;
 
-    // Station + confidence
-    if (data.station) {
-      stationSection.style.display = '';
-      var conf = data.trust?.confidence || 'medium';
-      stationInfo.innerHTML =
+    // Data Source / Observation Station label
+    var hasMETAR = data.station && data.primary_source === 'METAR';
+    if (hasMETAR) {
+      sourceSectionLabel.textContent = 'Observation Station';
+      sourceLabelInfo.innerHTML =
         '<span class="station-code">' +
         escapeHtml(data.station.code) +
         '</span> ' +
         escapeHtml(data.station.name) +
         ' &middot; ' +
         data.station.distance_miles +
-        ' mi' +
-        ' <span class="confidence-badge ' +
-        conf +
-        '">' +
-        conf +
-        ' confidence</span>';
+        ' mi';
     } else {
-      stationSection.style.display = 'none';
-      // Show confidence without station
-      if (data.trust) {
-        stationSection.style.display = '';
-        stationInfo.innerHTML =
-          '<span style="color: var(--gray-500)">' +
-          escapeHtml(data.trust.summary) +
-          '</span>' +
-          ' <span class="confidence-badge ' +
-          data.trust.confidence +
-          '">' +
-          data.trust.confidence +
-          ' confidence</span>';
-      }
+      sourceSectionLabel.textContent = 'Data Source';
+      var srcName = data.primary_source || 'Open-Meteo';
+      sourceLabelInfo.innerHTML =
+        '<span class="source-name">' + escapeHtml(srcName) + '</span>';
     }
 
-    // Primary conditions: wind speed + direction, gust, delta-T
+    // Confidence (prominent display)
+    var conf = data.trust?.confidence || 'medium';
+    var confSummary = data.trust?.summary || '';
+    confidenceDisplay.innerHTML =
+      '<span class="confidence-badge ' + conf + '">' + conf + ' confidence</span>' +
+      (confSummary ? ' <span class="confidence-summary">' + escapeHtml(confSummary) + '</span>' : '');
+
+    // Primary conditions: wind speed + direction, gust
     var m = data.metrics || {};
     primaryMetrics.innerHTML = '';
 
@@ -308,10 +302,6 @@
       createMetricRow('Wind Gust', formatMetric(m.wind_gust), m.wind_gust?.status)
     );
 
-    primaryMetrics.appendChild(
-      createMetricRow('Delta-T', formatMetric(m.delta_t), m.delta_t?.status)
-    );
-
     // Supporting conditions: temperature, RH, precip
     supportingMetrics.innerHTML = '';
     supportingMetrics.appendChild(
@@ -322,6 +312,13 @@
     );
     supportingMetrics.appendChild(
       createMetricRow('Precip Chance', formatMetric(m.precip_chance), m.precip_chance?.status)
+    );
+
+    // Delta-T (shown after supporting, lower visual emphasis)
+    var deltaTValue = formatMetric(m.delta_t);
+    var deltaTReason = data.delta_t_reason || '';
+    supportingMetrics.appendChild(
+      createMetricRowWithReason('Delta-T (evaporation risk)', deltaTValue, m.delta_t?.status, deltaTReason)
     );
 
     // Advisories
@@ -347,6 +344,14 @@
 
     // Show results
     resultsContent.classList.add('visible');
+
+    // Smooth scroll to results
+    setTimeout(function () {
+      var target = statusBanner;
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   }
 
   // ── Metric Row Builder ───────────────────────────────────────
@@ -373,6 +378,40 @@
     row.appendChild(dot);
     row.appendChild(lbl);
     row.appendChild(val);
+    return row;
+  }
+
+  function createMetricRowWithReason(label, valueStr, status, reason) {
+    var row = document.createElement('div');
+    row.className = 'metric-row metric-row-with-reason';
+
+    var dot = document.createElement('div');
+    dot.className = 'metric-dot ' + (status || 'none');
+
+    var lbl = document.createElement('div');
+    lbl.className = 'metric-label';
+    lbl.textContent = label;
+
+    var val = document.createElement('div');
+    val.className = 'metric-value';
+    if (!valueStr || valueStr === '—') {
+      val.className += ' unavailable';
+      val.textContent = '—';
+    } else {
+      val.textContent = valueStr;
+    }
+
+    row.appendChild(dot);
+    row.appendChild(lbl);
+    row.appendChild(val);
+
+    if (reason) {
+      var reasonEl = document.createElement('div');
+      reasonEl.className = 'metric-reason';
+      reasonEl.textContent = reason;
+      row.appendChild(reasonEl);
+    }
+
     return row;
   }
 
