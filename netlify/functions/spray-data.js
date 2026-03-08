@@ -2,8 +2,7 @@
 // Source priority: METAR observed → Open-Meteo → NOAA observed fallback
 // Each metric resolves independently from its best available source.
 
-const path = require('path');
-const fs = require('fs');
+// path and fs no longer needed — METAR stations loaded via require()
 
 // ── Thresholds (easy to edit) ──────────────────────────────────
 const THRESHOLDS = {
@@ -53,10 +52,12 @@ const METAR_MAX_AGE_MS = 2 * 60 * 60 * 1000; // 2 hours
 const METAR_MAX_CANDIDATES = 3;
 
 // ── Load METAR stations ────────────────────────────────────────
+// Use require() so Netlify's bundler includes the file in the function bundle.
+// fs.readFileSync with path.join(__dirname, ...) fails because the bundler
+// doesn't follow dynamic file reads into subdirectories.
 let metarStations = [];
 try {
-  const stationsPath = path.join(__dirname, 'data', 'metar-stations.json');
-  metarStations = JSON.parse(fs.readFileSync(stationsPath, 'utf-8'));
+  metarStations = require('./data/metar-stations.json');
 } catch (e) {
   console.error('Failed to load METAR stations:', e.message);
 }
@@ -130,39 +131,11 @@ async function buildSprayData(lat, lon) {
   let metarDistance = null;
   let metarStale = false;
 
-  // ── DEBUG container ──
-  const _debug = {
-    metar_candidates: [],
-    metar_attempts: [],
-    metar_outcome: null,
-    open_meteo: null,
-    winning_sources: {},
-    confidence_inputs: {},
-  };
-
   // ── Step 1: Try METAR ────────────────────────────────────────
   const nearbyStations = findNearbyStations(lat, lon, METAR_MAX_DISTANCE_MILES);
-
-  // ── DEBUG: Log all METAR candidates ──
-  _debug.metar_candidates = nearbyStations.map(s => ({
-    code: s.code,
-    name: s.name,
-    distance_miles: round(s.distance, 2)
-  }));
-  console.log(`[DEBUG] METAR candidates (${nearbyStations.length} within ${METAR_MAX_DISTANCE_MILES} mi):`,
-    JSON.stringify(_debug.metar_candidates, null, 2));
-
   const metarResult = await tryMETARStations(nearbyStations.slice(0, METAR_MAX_CANDIDATES));
 
-  // Handle debug-only result (all stations failed)
-  if (metarResult && metarResult._all_failed) {
-    _debug.metar_attempts = metarResult._debug_metar_attempts || [];
-    _debug.metar_outcome = 'ALL_STATIONS_FAILED';
-  }
-
-  if (metarResult && !metarResult._all_failed) {
-    _debug.metar_attempts = metarResult._debug_metar_attempts || [];
-    _debug.metar_outcome = 'SUCCESS';
+  if (metarResult) {
     sourcesUsed.push('METAR');
     const { data, station, distance, observationTime, isStale } = metarResult;
     metarDistance = distance;
@@ -212,9 +185,6 @@ async function buildSprayData(lat, lon) {
     const openMeteo = await fetchOpenMeteo(lat, lon);
     if (openMeteo) {
       sourcesUsed.push('Open-Meteo');
-
-      // ── DEBUG: Capture Open-Meteo debug ──
-      _debug.open_meteo = openMeteo._debug_open_meteo || null;
 
       // Fill any gaps from Open-Meteo
       if (raw.wind_speed.value == null && openMeteo.wind_speed != null) {
@@ -275,16 +245,6 @@ async function buildSprayData(lat, lon) {
       console.error('NOAA fallback failed:', e.message);
     }
   }
-
-  // ── DEBUG: Winning source per metric ──
-  _debug.winning_sources = {};
-  for (const [key, entry] of Object.entries(raw)) {
-    _debug.winning_sources[key] = {
-      source: entry.source,
-      value: entry.value != null ? round(entry.value, 2) : null
-    };
-  }
-  console.log('[DEBUG] Winning sources per metric:', JSON.stringify(_debug.winning_sources, null, 2));
 
   // ── Calculate derived metrics ────────────────────────────────
   let deltaT = null;
@@ -408,18 +368,6 @@ async function buildSprayData(lat, lon) {
     ? freshestTime.toISOString()
     : new Date().toISOString();
 
-  // ── DEBUG: Confidence inputs ──
-  _debug.confidence_inputs = {
-    sources_used: sourcesUsed,
-    metar_distance: metarDistance,
-    metar_stale: metarStale,
-    has_noaa: sourcesUsed.includes('NOAA'),
-    missing_key_fields: KEY_FIELDS.filter(f => metrics[f]?.value == null),
-    primary_source: primarySource,
-  };
-  console.log('[DEBUG] Confidence inputs:', JSON.stringify(_debug.confidence_inputs, null, 2));
-  console.log('[DEBUG] Final trust:', JSON.stringify(trust, null, 2));
-
   return {
     location: {
       lat: round(lat, 4),
@@ -438,8 +386,7 @@ async function buildSprayData(lat, lon) {
     meta: {
       last_updated: lastUpdated,
       sources_used: sourcesUsed
-    },
-    _debug
+    }
   };
 }
 
@@ -453,95 +400,38 @@ function findNearbyStations(lat, lon, maxMiles) {
 }
 
 async function tryMETARStations(stations) {
-  // ── DEBUG: METAR attempt log ──
-  const debugAttempts = [];
-
   for (const station of stations) {
-    const attempt = {
-      station_code: station.code,
-      station_name: station.name,
-      distance_miles: round(station.distance, 2),
-      api_returned_data: false,
-      observation_time: null,
-      age_minutes: null,
-      rejected_stale: false,
-      rejected_missing_fields: false,
-      rejected_fetch_error: null,
-      accepted: false,
-      raw_metar_keys: null,
-    };
-
     try {
       const data = await fetchMETAR(station.code);
-      if (!data) {
-        attempt.api_returned_data = false;
-        attempt.rejection_reason = 'fetchMETAR returned null (empty response or HTTP error)';
-        debugAttempts.push(attempt);
-        continue;
-      }
-
-      attempt.api_returned_data = true;
-      attempt.raw_metar_keys = Object.keys(data);
+      if (!data) continue;
 
       const observationTime = data.reportTime || data.obsTime || null;
-      attempt.observation_time = observationTime;
       let isStale = false;
 
       if (observationTime) {
         const age = Date.now() - new Date(observationTime).getTime();
-        attempt.age_minutes = round(age / (1000 * 60), 1);
-        if (age > METAR_MAX_AGE_MS) {
-          isStale = true;
-          attempt.rejected_stale = true;
-          attempt.rejection_reason = `Stale: ${round(age / (1000 * 60), 1)} min old (max ${METAR_MAX_AGE_MS / (1000 * 60)} min)`;
-          debugAttempts.push(attempt);
-          continue; // Skip stale, try next station
-        }
-      } else {
-        attempt.observation_time = 'NO TIMESTAMP IN RESPONSE';
+        if (age > METAR_MAX_AGE_MS) continue; // Skip stale, try next station
       }
 
       // Check if it has at least some useful data
       const hasWind = data.wskts != null || data.wspd != null;
       const hasTemp = data.temp != null;
-      attempt.has_wind = hasWind;
-      attempt.has_temp = hasTemp;
-      attempt.raw_wind_fields = { wskts: data.wskts, wspd: data.wspd, wgst: data.wgst, wdir: data.wdir };
-      attempt.raw_temp_fields = { temp: data.temp, dewp: data.dewp };
+      if (!hasWind && !hasTemp) continue;
 
-      if (!hasWind && !hasTemp) {
-        attempt.rejected_missing_fields = true;
-        attempt.rejection_reason = 'No wind AND no temp data in METAR response';
-        debugAttempts.push(attempt);
-        continue;
-      }
-
-      attempt.accepted = true;
-      attempt.rejection_reason = null;
-      debugAttempts.push(attempt);
-
-      console.log('[DEBUG] METAR attempts:', JSON.stringify(debugAttempts, null, 2));
-
-      const result = {
+      return {
         data: parseMETARData(data),
         station,
         distance: station.distance,
         observationTime,
         isStale
       };
-      result._debug_metar_attempts = debugAttempts;
-      return result;
     } catch (e) {
-      attempt.rejected_fetch_error = e.message;
-      attempt.rejection_reason = `Exception: ${e.message}`;
-      debugAttempts.push(attempt);
       console.error(`METAR fetch failed for ${station.code}:`, e.message);
       continue;
     }
   }
 
-  console.log('[DEBUG] METAR attempts (all failed):', JSON.stringify(debugAttempts, null, 2));
-  return { _debug_metar_attempts: debugAttempts, _all_failed: true };
+  return null;
 }
 
 async function fetchMETAR(stationCode) {
@@ -596,60 +486,27 @@ async function fetchOpenMeteo(lat, lon) {
   const data = await resp.json();
   if (!data.hourly || !data.hourly.time) return null;
 
-  // ── DEBUG: Open-Meteo hour selection ──
-  const now = new Date();
-  const debugOM = {
-    server_utc_now: now.toISOString(),
-    server_utc_timestamp: now.getTime(),
-    open_meteo_timezone: data.timezone || 'NOT RETURNED',
-    open_meteo_utc_offset: data.utc_offset_seconds ?? 'NOT RETURNED',
-    first_5_hourly_times: data.hourly.time.slice(0, 5),
-    last_3_hourly_times: data.hourly.time.slice(-3),
-    total_hourly_entries: data.hourly.time.length,
-  };
-
-  // Show what Date() parses the first time string as
-  const firstTimeStr = data.hourly.time[0];
-  const parsedFirst = new Date(firstTimeStr);
-  debugOM.first_time_raw_string = firstTimeStr;
-  debugOM.first_time_parsed_as_utc = parsedFirst.toISOString();
-  debugOM.first_time_parsed_timestamp = parsedFirst.getTime();
-  debugOM.parsing_note = firstTimeStr.endsWith('Z') || firstTimeStr.includes('+') || firstTimeStr.includes('T')
-    ? 'Has timezone indicator'
-    : 'NO timezone indicator — Date() will parse as UTC midnight, not local time';
-
-  // Find the hourly entry closest to now
+  // Open-Meteo returns local-time strings (e.g. "2024-03-08T14:00") with no
+  // timezone suffix.  new Date() would parse these as UTC, which is wrong.
+  // Subtract utc_offset_seconds so the parsed timestamp represents the true
+  // UTC instant for each hour.
+  const utcOffsetMs = (data.utc_offset_seconds || 0) * 1000;
+  const nowMs = Date.now();
   const times = data.hourly.time;
   let bestIdx = 0;
   let bestDiff = Infinity;
 
   for (let i = 0; i < times.length; i++) {
-    const diff = Math.abs(new Date(times[i]).getTime() - now.getTime());
+    // Parse as-if UTC then shift by the offset to get the real UTC instant
+    const utcMs = new Date(times[i]).getTime() - utcOffsetMs;
+    const diff = Math.abs(utcMs - nowMs);
     if (diff < bestDiff) {
       bestDiff = diff;
       bestIdx = i;
     }
   }
 
-  debugOM.selected_index = bestIdx;
-  debugOM.selected_time_string = times[bestIdx];
-  debugOM.selected_time_parsed_utc = new Date(times[bestIdx]).toISOString();
-  debugOM.best_diff_ms = bestDiff;
-  debugOM.best_diff_hours = round(bestDiff / (1000 * 60 * 60), 2);
-  debugOM.selected_raw_values = {
-    temperature: data.hourly.temperature_2m?.[bestIdx] ?? null,
-    relative_humidity: data.hourly.relative_humidity_2m?.[bestIdx] ?? null,
-    wind_speed: data.hourly.wind_speed_10m?.[bestIdx] ?? null,
-    wind_gust: data.hourly.wind_gusts_10m?.[bestIdx] ?? null,
-    wind_direction: data.hourly.wind_direction_10m?.[bestIdx] ?? null,
-    dew_point: data.hourly.dew_point_2m?.[bestIdx] ?? null,
-    precip_chance: data.hourly.precipitation_probability?.[bestIdx] ?? null,
-  };
-
-  console.log('[DEBUG] Open-Meteo hour selection:', JSON.stringify(debugOM, null, 2));
-  // ── END DEBUG ──
-
-  const result = {
+  return {
     wind_speed: data.hourly.wind_speed_10m?.[bestIdx] ?? null,
     wind_direction: data.hourly.wind_direction_10m?.[bestIdx] ?? null,
     wind_gust: data.hourly.wind_gusts_10m?.[bestIdx] ?? null,
@@ -658,8 +515,6 @@ async function fetchOpenMeteo(lat, lon) {
     relative_humidity: data.hourly.relative_humidity_2m?.[bestIdx] ?? null,
     precip_chance: data.hourly.precipitation_probability?.[bestIdx] ?? null
   };
-  result._debug_open_meteo = debugOM;
-  return result;
 }
 
 // ── NOAA Observed Fallback ─────────────────────────────────────
