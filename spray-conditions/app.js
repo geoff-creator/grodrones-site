@@ -342,6 +342,9 @@
       '<span>Sources: ' + escapeHtml(sources.join(', ') || 'None') + '</span>' +
       '<span>Last updated: ' + escapeHtml(updated) + '</span>';
 
+    // ── DEBUG panel (temporary) ──
+    renderDebugPanel(data._debug);
+
     // Show results
     resultsContent.classList.add('visible');
 
@@ -352,6 +355,187 @@
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 100);
+  }
+
+  // ── Temporary Debug Panel ──────────────────────────────────────
+  function renderDebugPanel(debug) {
+    // Remove any existing debug panel
+    var existing = document.getElementById('debugPanel');
+    if (existing) existing.remove();
+
+    if (!debug) return;
+
+    var panel = document.createElement('details');
+    panel.id = 'debugPanel';
+    panel.style.cssText = 'margin-top:16px;padding:12px;background:#1a1a2e;border:1px solid #444;border-radius:8px;font-family:monospace;font-size:12px;color:#e0e0e0;';
+
+    var summary = document.createElement('summary');
+    summary.textContent = 'Debug Info';
+    summary.style.cssText = 'cursor:pointer;font-weight:bold;font-size:14px;color:#ff6b6b;padding:4px 0;';
+    panel.appendChild(summary);
+
+    var content = document.createElement('div');
+    content.style.cssText = 'margin-top:8px;';
+
+    // 1. Winning sources
+    content.appendChild(debugSection('Winning Source Per Metric', function (container) {
+      var ws = debug.winning_sources || {};
+      var keys = ['wind_speed', 'wind_direction', 'wind_gust', 'temperature', 'relative_humidity', 'dew_point', 'precip_chance'];
+      keys.forEach(function (k) {
+        var entry = ws[k] || {};
+        var src = entry.source || 'NONE';
+        var val = entry.value != null ? entry.value : 'null';
+        var color = src === 'METAR' ? '#4ade80' : src === 'Open-Meteo' ? '#facc15' : src === 'NOAA' ? '#fb923c' : '#888';
+        var line = document.createElement('div');
+        line.style.cssText = 'padding:2px 0;';
+        line.innerHTML = '<span style="color:#aaa;display:inline-block;width:160px;">' + k + '</span>' +
+          '<span style="color:' + color + ';font-weight:bold;">' + escapeHtml(src) + '</span>' +
+          ' <span style="color:#ccc;">= ' + val + '</span>';
+        container.appendChild(line);
+      });
+    }));
+
+    // 2. METAR candidates & attempts
+    content.appendChild(debugSection('METAR Station Search', function (container) {
+      var candidates = debug.metar_candidates || [];
+      var heading = document.createElement('div');
+      heading.style.cssText = 'color:#88c0d0;margin-bottom:4px;';
+      heading.textContent = 'Candidates within range: ' + candidates.length;
+      container.appendChild(heading);
+
+      candidates.forEach(function (c) {
+        var line = document.createElement('div');
+        line.style.cssText = 'padding:1px 0;padding-left:8px;';
+        line.textContent = c.code + ' (' + c.name + ') — ' + c.distance_miles + ' mi';
+        container.appendChild(line);
+      });
+
+      var outcome = document.createElement('div');
+      outcome.style.cssText = 'margin-top:8px;color:#88c0d0;';
+      outcome.textContent = 'Outcome: ' + (debug.metar_outcome || 'N/A');
+      container.appendChild(outcome);
+
+      var attempts = debug.metar_attempts || [];
+      if (attempts.length > 0) {
+        var ah = document.createElement('div');
+        ah.style.cssText = 'margin-top:6px;color:#88c0d0;';
+        ah.textContent = 'Attempts (' + attempts.length + '):';
+        container.appendChild(ah);
+
+        attempts.forEach(function (a) {
+          var block = document.createElement('div');
+          block.style.cssText = 'margin:4px 0;padding:6px 8px;background:#0d1117;border-radius:4px;border-left:3px solid ' + (a.accepted ? '#4ade80' : '#f87171') + ';';
+          var lines = [
+            a.station_code + ' — ' + a.distance_miles + ' mi',
+            'API returned data: ' + a.api_returned_data,
+            'Observation time: ' + (a.observation_time || 'N/A'),
+            'Age: ' + (a.age_minutes != null ? a.age_minutes + ' min' : 'N/A'),
+          ];
+          if (a.has_wind != null) lines.push('Has wind: ' + a.has_wind + ', Has temp: ' + a.has_temp);
+          if (a.raw_wind_fields) lines.push('Wind fields: ' + JSON.stringify(a.raw_wind_fields));
+          if (a.raw_temp_fields) lines.push('Temp fields: ' + JSON.stringify(a.raw_temp_fields));
+          if (a.accepted) {
+            lines.push('ACCEPTED');
+          } else {
+            lines.push('REJECTED: ' + (a.rejection_reason || 'unknown'));
+          }
+          block.innerHTML = lines.map(function (l) { return '<div>' + escapeHtml(l) + '</div>'; }).join('');
+          container.appendChild(block);
+        });
+      }
+    }));
+
+    // 3. Open-Meteo hour selection
+    content.appendChild(debugSection('Open-Meteo Hour Selection', function (container) {
+      var om = debug.open_meteo;
+      if (!om) {
+        container.textContent = 'No Open-Meteo debug data returned.';
+        return;
+      }
+      var items = [
+        ['Server UTC now', om.server_utc_now],
+        ['Open-Meteo timezone', om.open_meteo_timezone],
+        ['UTC offset (seconds)', om.open_meteo_utc_offset],
+        ['Total hourly entries', om.total_hourly_entries],
+        ['', ''],
+        ['First 5 hourly times', (om.first_5_hourly_times || []).join(', ')],
+        ['Last 3 hourly times', (om.last_3_hourly_times || []).join(', ')],
+        ['', ''],
+        ['First time raw string', om.first_time_raw_string],
+        ['First time parsed as UTC', om.first_time_parsed_as_utc],
+        ['PARSING NOTE', om.parsing_note],
+        ['', ''],
+        ['Selected index', om.selected_index],
+        ['Selected time string', om.selected_time_string],
+        ['Selected parsed as UTC', om.selected_time_parsed_utc],
+        ['Diff from now', om.best_diff_hours + ' hours'],
+      ];
+      items.forEach(function (pair) {
+        if (!pair[0] && !pair[1]) {
+          container.appendChild(document.createElement('br'));
+          return;
+        }
+        var line = document.createElement('div');
+        line.style.cssText = 'padding:1px 0;';
+        var isWarning = pair[0] === 'PARSING NOTE' && pair[1] && pair[1].indexOf('NO timezone') >= 0;
+        line.innerHTML = '<span style="color:#aaa;display:inline-block;width:200px;">' + escapeHtml(pair[0]) + '</span>' +
+          '<span style="color:' + (isWarning ? '#ff6b6b;font-weight:bold' : '#e0e0e0') + ';">' + escapeHtml(String(pair[1])) + '</span>';
+        container.appendChild(line);
+      });
+
+      // Selected raw values
+      var rv = om.selected_raw_values;
+      if (rv) {
+        var rvh = document.createElement('div');
+        rvh.style.cssText = 'margin-top:8px;color:#88c0d0;';
+        rvh.textContent = 'Selected hour raw values:';
+        container.appendChild(rvh);
+        Object.keys(rv).forEach(function (k) {
+          var line = document.createElement('div');
+          line.style.cssText = 'padding:1px 0;padding-left:8px;';
+          line.innerHTML = '<span style="color:#aaa;display:inline-block;width:160px;">' + k + '</span>' +
+            '<span style="color:#e0e0e0;">' + rv[k] + '</span>';
+          container.appendChild(line);
+        });
+      }
+    }));
+
+    // 4. Confidence inputs
+    content.appendChild(debugSection('Confidence Decision', function (container) {
+      var ci = debug.confidence_inputs || {};
+      var items = [
+        ['Sources used', (ci.sources_used || []).join(', ')],
+        ['METAR distance', ci.metar_distance != null ? ci.metar_distance + ' mi' : 'N/A (no METAR)'],
+        ['METAR stale', String(ci.metar_stale)],
+        ['Has NOAA', String(ci.has_noaa)],
+        ['Missing key fields', (ci.missing_key_fields || []).join(', ') || 'none'],
+        ['Primary source', ci.primary_source || 'none'],
+      ];
+      items.forEach(function (pair) {
+        var line = document.createElement('div');
+        line.style.cssText = 'padding:1px 0;';
+        line.innerHTML = '<span style="color:#aaa;display:inline-block;width:180px;">' + escapeHtml(pair[0]) + '</span>' +
+          '<span style="color:#e0e0e0;">' + escapeHtml(pair[1]) + '</span>';
+        container.appendChild(line);
+      });
+    }));
+
+    panel.appendChild(content);
+    resultsContent.appendChild(panel);
+  }
+
+  function debugSection(title, buildFn) {
+    var section = document.createElement('div');
+    section.style.cssText = 'margin-bottom:12px;';
+    var h = document.createElement('div');
+    h.style.cssText = 'font-weight:bold;color:#88c0d0;margin-bottom:4px;font-size:13px;border-bottom:1px solid #333;padding-bottom:2px;';
+    h.textContent = title;
+    section.appendChild(h);
+    var body = document.createElement('div');
+    body.style.cssText = 'padding-left:4px;';
+    buildFn(body);
+    section.appendChild(body);
+    return section;
   }
 
   // ── Metric Row Builder ───────────────────────────────────────
